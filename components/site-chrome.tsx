@@ -3,9 +3,10 @@ import { ArrowRight, MessageCircleMore } from "lucide-react";
 
 import { footerLinks, navItems, whatsappNumber } from "@/lib/site-data";
 
-const minimalNavItems = navItems.filter((item) =>
-  ["Collections", "OEM & ODM", "Factory", "Contact"].includes(item.label)
-);
+const headerNavItems = [
+  { label: "Collections", href: "/collections" },
+  { label: "Journal", href: "/about-us" },
+];
 
 export function SiteHeader() {
   return (
@@ -26,7 +27,7 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-8 xl:flex">
-          {minimalNavItems.map((item) => (
+          {headerNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}

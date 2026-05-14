@@ -10,6 +10,8 @@ import {
   certifications,
   collections,
   contactDetails,
+  factoryPlogMoments,
+  factoryPlogTimeline,
   customizationServices,
   factoryScenes,
   interiorPages,
@@ -204,6 +206,128 @@ export default async function InteriorPage({ params }: PageProps) {
             })}
           </div>
         </AnimatedSection>
+      ) : null}
+
+      {slug === "factory-plog" ? (
+        <>
+          <AnimatedSection className="bg-[#f7f2ec] py-20">
+            <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
+              <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+                <div className="grid gap-5 md:grid-cols-2">
+                  {factoryPlogMoments.map((moment) => (
+                    <div
+                      key={moment.title}
+                      className="overflow-hidden rounded-[2rem] border border-stone-200 bg-white"
+                    >
+                      <div
+                        className={`h-56 bg-gradient-to-br ${moment.accent}`}
+                      />
+                      <div className="p-6">
+                        <p className="text-xs uppercase tracking-[0.3em] text-stone-500">
+                          Factory Moment
+                        </p>
+                        <h3 className="mt-4 text-2xl font-semibold text-stone-950">
+                          {moment.title}
+                        </h3>
+                        <p className="mt-4 leading-7 text-stone-600">
+                          {moment.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="rounded-[2rem] border border-stone-200 bg-white p-6 md:p-8">
+                  <p className="text-xs uppercase tracking-[0.34em] text-stone-500">
+                    One Day In The Factory
+                  </p>
+                  <h2 className="mt-5 text-3xl font-semibold text-stone-950 md:text-4xl">
+                    A timeline view that makes the production atmosphere easier
+                    to picture.
+                  </h2>
+                  <div className="mt-8 grid gap-5">
+                    {factoryPlogTimeline.map((item) => (
+                      <div
+                        key={`${item.time}-${item.title}`}
+                        className="grid gap-3 border-b border-stone-200 pb-5 last:border-b-0 last:pb-0 md:grid-cols-[86px_1fr]"
+                      >
+                        <span className="text-xs uppercase tracking-[0.28em] text-stone-400">
+                          {item.time}
+                        </span>
+                        <div>
+                          <p className="text-lg font-semibold text-stone-950">
+                            {item.title}
+                          </p>
+                          <p className="mt-2 text-sm leading-7 text-stone-600">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection className="bg-white py-20">
+            <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
+              <div className="rounded-[2rem] border border-stone-200 bg-[#f7f2ec] p-6 md:p-8">
+                <p className="text-xs uppercase tracking-[0.34em] text-stone-500">
+                  Spaces Buyers Care About
+                </p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  {factoryScenes.map((scene) => {
+                    const Icon = scene.icon;
+
+                    return (
+                      <div
+                        key={scene.title}
+                        className="rounded-[1.5rem] border border-stone-200 bg-white p-5"
+                      >
+                        <Icon className="h-5 w-5 text-stone-900" />
+                        <h3 className="mt-4 text-lg font-semibold text-stone-950">
+                          {scene.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-7 text-stone-600">
+                          {scene.description}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="rounded-[2rem] border border-stone-200 bg-stone-950 p-6 text-white md:p-8">
+                <p className="text-xs uppercase tracking-[0.34em] text-white/55">
+                  Buyer Takeaway
+                </p>
+                <h2 className="mt-5 text-3xl font-semibold md:text-4xl">
+                  A plog page makes the factory feel more real, active, and
+                  trustworthy.
+                </h2>
+                <div className="mt-8 grid gap-4">
+                  {processSteps.slice(1, 5).map((step, index) => (
+                    <div
+                      key={step.title}
+                      className="rounded-[1.4rem] border border-white/10 bg-white/6 p-4"
+                    >
+                      <p className="text-xs uppercase tracking-[0.28em] text-white/45">
+                        Step 0{index + 1}
+                      </p>
+                      <p className="mt-3 text-lg font-semibold text-white">
+                        {step.title}
+                      </p>
+                      <p className="mt-2 text-sm leading-7 text-white/68">
+                        {step.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </>
       ) : null}
 
       {slug === "certifications" ? (

@@ -64,6 +64,23 @@ export type CertificationItem = {
   description: string;
 };
 
+export type FactoryStrengthMetric = {
+  value: string;
+  label: string;
+};
+
+export type FactoryPlogMoment = {
+  title: string;
+  description: string;
+  accent: string;
+};
+
+export type FactoryPlogTimelineItem = {
+  time: string;
+  title: string;
+  description: string;
+};
+
 export type ProductItem = {
   name: string;
   fabric: string;
@@ -107,8 +124,9 @@ export const navItems: NavItem[] = [
   { label: "Collections", href: "/collections" },
   { label: "OEM & ODM", href: "/oem-odm" },
   { label: "Factory", href: "/factory" },
-  { label: "Certifications", href: "/certifications" },
   { label: "About Us", href: "/about-us" },
+  { label: "Certifications", href: "/certifications" },
+  { label: "Company Profile", href: "/company-profile" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -203,6 +221,13 @@ export const certifications: CertificationItem[] = [
   { name: "GOTS", description: "Responsible textile sourcing programs for organic-focused collections." },
   { name: "ISO9001", description: "Documented process controls that support reliable quality consistency." },
   { name: "BSCI", description: "Compliance-focused manufacturing partnerships for international buyers." },
+];
+
+export const factoryStrengthMetrics: FactoryStrengthMetric[] = [
+  { value: "3000sqm", label: "Production and finishing facility" },
+  { value: "10+ Years", label: "Home textile manufacturing experience" },
+  { value: "50+ Countries", label: "Export markets served" },
+  { value: "7 Days", label: "Sampling response for active projects" },
 ];
 
 export const featuredProducts: ProductItem[] = [
@@ -313,6 +338,18 @@ export const interiorPages: Record<string, InteriorPage> = {
     ctaLabel: "Talk to Our Factory Team",
     heroAccent: "from-[#202020] via-[#59514c] to-[#d8cbc0]",
   },
+  "factory-plog": {
+    eyebrow: "Factory Plog",
+    title: "A more visual factory journal that lets buyers feel the daily rhythm behind production",
+    description: "Instead of abstract capability claims, this page walks through the workshop atmosphere, production checkpoints, packaging discipline, and the real pace of factory operations.",
+    highlights: [
+      "Daily factory scenes presented like a visual sourcing journal",
+      "Process moments that help buyers understand how orders move in reality",
+      "Certification and scale context woven into the story rather than isolated claims",
+    ],
+    ctaLabel: "Request Factory Details",
+    heroAccent: "from-[#1f1a17] via-[#786555] to-[#e6d9cc]",
+  },
   certifications: {
     eyebrow: "Trust Signals",
     title: "International certifications that support premium sourcing confidence",
@@ -326,6 +363,18 @@ export const interiorPages: Record<string, InteriorPage> = {
     heroAccent: "from-[#242424] via-[#686868] to-[#d7d1ca]",
   },
   "about-us": {
+    eyebrow: "Company",
+    title: "A textile team focused on long-term cooperation, not one-off transactions",
+    description: "We help overseas brands launch and scale custom home textile lines with responsive development, dependable production, and communication built for international business.",
+    highlights: [
+      "Positioned as a premium manufacturing partner for modern global brands",
+      "Designed to serve Amazon sellers, distributors, studios, and hotel suppliers",
+      "Built around repeat orders, quick response, and sustainable client relationships",
+    ],
+    ctaLabel: "Meet Our Team",
+    heroAccent: "from-[#201d1a] via-[#77695d] to-[#e3d7cb]",
+  },
+  "company-profile": {
     eyebrow: "Company",
     title: "A textile team focused on long-term cooperation, not one-off transactions",
     description: "We help overseas brands launch and scale custom home textile lines with responsive development, dependable production, and communication built for international business.",
@@ -404,5 +453,51 @@ export const factoryScenes = [
     title: "Warehouse",
     description: "Carton staging and shipment preparation aligned with buyer schedules.",
     icon: Images,
+  },
+];
+
+export const factoryPlogMoments: FactoryPlogMoment[] = [
+  {
+    title: "Morning Line Check",
+    description: "The day begins with fabric rolls, trim confirmation, and sewing-line preparation before the first batch moves forward.",
+    accent: "from-[#231f1c] via-[#6f6358] to-[#d8ccc1]",
+  },
+  {
+    title: "Cutting & Sewing Rhythm",
+    description: "Teams move from cutting tables to sewing stations with a steady sequence designed to keep output clean and consistent.",
+    accent: "from-[#2d2c2b] via-[#7e756d] to-[#e4d9cf]",
+  },
+  {
+    title: "Inline Quality Review",
+    description: "Measurements, stitching tension, fabric hand feel, and branding details are checked before products continue downstream.",
+    accent: "from-[#22272b] via-[#66717b] to-[#d8dfe4]",
+  },
+  {
+    title: "Packing & Export Prep",
+    description: "Finished goods are folded, packed, labeled, and staged for export so presentation stays aligned with buyer expectations.",
+    accent: "from-[#3a312c] via-[#8f7d72] to-[#eadfd6]",
+  },
+];
+
+export const factoryPlogTimeline: FactoryPlogTimelineItem[] = [
+  {
+    time: "08:30",
+    title: "Production briefing",
+    description: "Teams confirm today’s order priorities, approved sample references, and packaging notes before work begins.",
+  },
+  {
+    time: "10:00",
+    title: "Workshop in motion",
+    description: "Fabric cutting, sewing, embroidery, and piece matching move in parallel as supervisors check workmanship on the line.",
+  },
+  {
+    time: "13:30",
+    title: "Inspection checkpoint",
+    description: "Semi-finished goods are reviewed for size tolerance, seam quality, color consistency, and buyer-specific details.",
+  },
+  {
+    time: "16:00",
+    title: "Packing discipline",
+    description: "Products shift into final folding, insert placement, carton marking, and export preparation for shipment schedules.",
   },
 ];

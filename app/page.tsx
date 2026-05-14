@@ -10,6 +10,8 @@ import {
   collections,
   contactDetails,
   customizationServices,
+  factoryScenes,
+  factoryStrengthMetrics,
   processSteps,
   testimonials,
   trustStats,
@@ -137,6 +139,127 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
+      <AnimatedSection className="bg-white py-20 md:py-28">
+        <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
+          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <SectionHeading
+                eyebrow="Factory Strength"
+                title="A factory presentation that shows real capability, not just a generic supplier claim."
+                description="This section brings together facility scale, daily production flow, and certification proof so buyers can quickly understand how the factory operates."
+              />
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                {factoryStrengthMetrics.map((metric) => (
+                  <div
+                    key={metric.label}
+                    className="rounded-[1.7rem] border border-stone-200 bg-[#f7f2ec] p-5"
+                  >
+                    <p className="text-2xl font-semibold text-stone-950">
+                      {metric.value}
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-stone-600">
+                      {metric.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 rounded-[2rem] border border-stone-200 bg-stone-950 p-6 text-white md:p-7">
+                <p className="text-xs uppercase tracking-[0.32em] text-white/55">
+                  Daily Factory Flow
+                </p>
+                <div className="mt-6 grid gap-4">
+                  {factoryScenes.map((scene) => {
+                    const Icon = scene.icon;
+
+                    return (
+                      <div
+                        key={scene.title}
+                        className="grid gap-4 rounded-[1.35rem] border border-white/10 bg-white/6 p-4 md:grid-cols-[44px_1fr]"
+                      >
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <p className="text-base font-semibold text-white">
+                            {scene.title}
+                          </p>
+                          <p className="mt-2 text-sm leading-7 text-white/68">
+                            {scene.description}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <Link
+                  href="/factory-plog"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white"
+                >
+                  View Factory Plog
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-[2.2rem] border border-stone-200 bg-[#f7f2ec] p-6 md:p-8">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.32em] text-stone-500">
+                    Compliance & Workflow
+                  </p>
+                  <h3 className="mt-3 text-2xl font-semibold text-stone-950 md:text-3xl">
+                    Certifications and process discipline presented in one block.
+                  </h3>
+                </div>
+              </div>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {certifications.map((certification) => (
+                  <div
+                    key={certification.name}
+                    className="rounded-[1.45rem] border border-stone-200 bg-white p-5"
+                  >
+                    <p className="text-xs uppercase tracking-[0.28em] text-stone-500">
+                      Certified
+                    </p>
+                    <p className="mt-3 text-lg font-semibold text-stone-950">
+                      {certification.name}
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-stone-600">
+                      {certification.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 rounded-[1.7rem] border border-stone-200 bg-white p-5 md:p-6">
+                <p className="text-sm font-semibold uppercase tracking-[0.28em] text-stone-500">
+                  Enterprise Routine
+                </p>
+                <div className="mt-6 grid gap-4">
+                  {processSteps.slice(0, 5).map((step, index) => (
+                    <div
+                      key={step.title}
+                      className="grid gap-3 border-b border-stone-200 pb-4 last:border-b-0 last:pb-0 md:grid-cols-[64px_1fr]"
+                    >
+                      <span className="text-xs uppercase tracking-[0.28em] text-stone-400">
+                        0{index + 1}
+                      </span>
+                      <div>
+                        <p className="text-base font-semibold text-stone-950">
+                          {step.title}
+                        </p>
+                        <p className="mt-2 text-sm leading-7 text-stone-600">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
       <AnimatedSection className="bg-[#f7f2ec] py-20 md:py-28">
         <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
@@ -203,29 +326,11 @@ export default function Home() {
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
             <SectionHeading
-              eyebrow="Proof"
-              title="Trust signals reduced so they support the page instead of slowing it down."
-              description="Only the most important reassurance remains on the homepage."
+              eyebrow="Buyer Confidence"
+              title="Social proof and long-term cooperation reasons stay focused on buyer reassurance."
+              description="With certifications moved into the factory block, this section stays dedicated to client confidence, retention, and sourcing comfort."
             />
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              {certifications.slice(0, 2).map((certification) => (
-                <div
-                  key={certification.name}
-                  className="rounded-[1.5rem] border border-stone-200 bg-white p-5"
-                >
-                  <p className="text-xs uppercase tracking-[0.28em] text-stone-500">
-                    Certified
-                  </p>
-                  <p className="mt-3 text-lg font-semibold text-stone-950">
-                    {certification.name}
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-stone-600">
-                    {certification.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 rounded-[1.75rem] border border-stone-200 bg-[#f7f2ec] p-6">
+            <div className="mt-10 rounded-[1.75rem] border border-stone-200 bg-[#f7f2ec] p-6">
               <p className="text-sm font-semibold text-stone-950">
                 Why buyers stay with us
               </p>
