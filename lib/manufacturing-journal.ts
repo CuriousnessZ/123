@@ -14,6 +14,7 @@ export type JournalGalleryItem = {
   title: string;
   caption: string;
   accent: string;
+  imageUrl?: string;
 };
 
 export type JournalMetric = {
@@ -39,6 +40,7 @@ export type JournalPost = {
   pinned: boolean;
   status: JournalStatus;
   coverAccent: string;
+  coverImageUrl?: string;
   heroSummary: string;
   overview: string;
   storyBlocks: JournalStoryBlock[];

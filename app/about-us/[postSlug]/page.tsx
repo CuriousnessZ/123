@@ -6,9 +6,11 @@ import { notFound } from "next/navigation";
 import { AnimatedSection } from "@/components/animated-section";
 import {
   formatJournalDate,
-  getJournalPostBySlug,
-  publishedManufacturingJournalPosts,
-} from "@/lib/manufacturing-journal";
+  getLocalizedJournalData,
+  getLocalizedJournalPostBySlug,
+} from "@/lib/localized-journal";
+import { getLocale } from "@/lib/get-locale";
+import { createTranslator } from "@/lib/i18n";
 
 type PageProps = {
   params: Promise<{
@@ -17,7 +19,8 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  return publishedManufacturingJournalPosts.map((post) => ({
+  const { publishedPosts } = await getLocalizedJournalData("en");
+  return publishedPosts.map((post) => ({
     postSlug: post.slug,
   }));
 }
@@ -26,7 +29,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { postSlug } = await params;
-  const post = getJournalPostBySlug(postSlug);
+  const post = await getLocalizedJournalPostBySlug("en", postSlug);
 
   if (!post || post.status !== "published") {
     return {};
@@ -42,7 +45,9 @@ export default async function ManufacturingJournalDetailPage({
   params,
 }: PageProps) {
   const { postSlug } = await params;
-  const post = getJournalPostBySlug(postSlug);
+  const locale = await getLocale();
+  const t = createTranslator(locale);
+  const post = await getLocalizedJournalPostBySlug(locale, postSlug);
 
   if (!post || post.status !== "published") {
     notFound();
@@ -59,11 +64,11 @@ export default async function ManufacturingJournalDetailPage({
                 className="inline-flex items-center gap-2 text-sm font-semibold text-white/72 hover:text-white"
               >
                 <ArrowLeft className="h-4 w-4" />
-                Back to Journal
+                {t("Back to Journal")}
               </Link>
               <div className="mt-8 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/55">
                 <span>{post.coverLabel}</span>
-                <span>{formatJournalDate(post.publishedAt)}</span>
+                <span>{formatJournalDate(locale, post.publishedAt)}</span>
                 <span>{post.readTime}</span>
               </div>
               <h1 className="mt-5 text-4xl font-semibold tracking-tight md:text-6xl md:leading-[1.05]">
@@ -93,6 +98,12 @@ export default async function ManufacturingJournalDetailPage({
                   loop
                   playsInline
                 />
+              ) : post.coverImageUrl ? (
+                <img
+                  className="h-full min-h-[420px] w-full object-cover"
+                  src={post.coverImageUrl}
+                  alt={post.title}
+                />
               ) : (
                 <div
                   className={`min-h-[420px] bg-gradient-to-br ${post.coverAccent}`}
@@ -107,7 +118,7 @@ export default async function ManufacturingJournalDetailPage({
         <div className="space-y-8">
           <div className="rounded-[2rem] border border-stone-200 bg-white p-6 md:p-8">
             <p className="text-xs uppercase tracking-[0.34em] text-stone-500">
-              Project Overview
+              {t("Project Overview")}
             </p>
             <p className="mt-5 text-base leading-8 text-stone-600 md:text-lg">
               {post.overview}
@@ -134,7 +145,7 @@ export default async function ManufacturingJournalDetailPage({
 
           <div className="rounded-[2rem] border border-stone-200 bg-[#f7f2ec] p-6 md:p-8">
             <p className="text-xs uppercase tracking-[0.34em] text-stone-500">
-              Story Blocks
+              {t("Story Blocks")}
             </p>
             <div className="mt-6 space-y-6">
               {post.storyBlocks.map((block) => (
@@ -160,10 +171,10 @@ export default async function ManufacturingJournalDetailPage({
           <div className="space-y-8">
             <div className="max-w-4xl">
             <p className="text-xs uppercase tracking-[0.34em] text-stone-500">
-              Production Timeline
+              {t("Production Timeline")}
             </p>
             <h2 className="mt-5 text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl">
-              A clean operational sequence from development to shipment.
+              {t("A clean operational sequence from development to shipment.")}
             </h2>
           </div>
             <div className="rounded-[2rem] border border-stone-200 bg-white p-6 md:p-8">
@@ -196,10 +207,10 @@ export default async function ManufacturingJournalDetailPage({
         <div className="grid gap-8">
           <div>
             <p className="text-xs uppercase tracking-[0.34em] text-stone-500">
-              Factory Process Gallery
+              {t("Factory Process Gallery")}
             </p>
             <h2 className="mt-5 text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl">
-              Large visual sections that make production feel more tangible.
+              {t("Large visual sections that make production feel more tangible.")}
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -208,7 +219,15 @@ export default async function ManufacturingJournalDetailPage({
                 key={item.title}
                 className="overflow-hidden rounded-[2rem] border border-stone-200 bg-white"
               >
-                <div className={`h-72 bg-gradient-to-br ${item.accent}`} />
+                {item.imageUrl ? (
+                  <img
+                    className="h-72 w-full object-cover"
+                    src={item.imageUrl}
+                    alt={item.title}
+                  />
+                ) : (
+                  <div className={`h-72 bg-gradient-to-br ${item.accent}`} />
+                )}
                 <div className="p-6">
                   <h3 className="text-2xl font-semibold text-stone-950">
                     {item.title}
@@ -227,7 +246,7 @@ export default async function ManufacturingJournalDetailPage({
         <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
             <p className="text-xs uppercase tracking-[0.34em] text-white/55">
-              Shipment Section
+              {t("Shipment Section")}
             </p>
             <h2 className="mt-5 text-3xl font-semibold md:text-5xl">
               {post.shipment.title}
@@ -254,17 +273,19 @@ export default async function ManufacturingJournalDetailPage({
       <AnimatedSection className="mx-auto w-full max-w-7xl px-5 py-20 md:px-8">
         <div className="rounded-[2.5rem] bg-white p-8 shadow-[0_26px_90px_rgba(18,16,12,0.08)] md:p-10">
           <p className="text-xs uppercase tracking-[0.34em] text-stone-500">
-            Next Story
+            {t("Next Story")}
           </p>
           <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl">
-            Continue exploring how this factory turns process into a visual trust signal.
+            {t(
+              "Continue exploring how this factory turns process into a visual trust signal."
+            )}
           </h2>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Link href="/about-us" className="button-secondary">
-              Back to Journal Feed
+              {t("Back to Journal Feed")}
             </Link>
             <Link href="/contact#inquiry" className="button-primary">
-              Request Factory Details
+              {t("Request Factory Details")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>

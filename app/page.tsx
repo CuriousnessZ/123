@@ -5,18 +5,9 @@ import { AnimatedSection } from "@/components/animated-section";
 import { HeroFilm } from "@/components/hero-film";
 import { InquiryForm } from "@/components/inquiry-form";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
-import {
-  certifications,
-  collections,
-  contactDetails,
-  customizationServices,
-  factoryScenes,
-  factoryStrengthMetrics,
-  processSteps,
-  testimonials,
-  trustStats,
-  whyPartnerPoints,
-} from "@/lib/site-data";
+import { getLocale } from "@/lib/get-locale";
+import { createTranslator } from "@/lib/i18n";
+import { getLocalizedSiteData } from "@/lib/localized-site-data";
 
 function SectionHeading({
   eyebrow,
@@ -48,7 +39,22 @@ function SectionHeading({
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const locale = await getLocale();
+  const t = createTranslator(locale);
+  const {
+    certifications,
+    collections,
+    contactDetails,
+    customizationServices,
+    factoryScenes,
+    factoryStrengthMetrics,
+    processSteps,
+    testimonials,
+    trustStats,
+    whyPartnerPoints,
+  } = getLocalizedSiteData(locale);
+
   return (
     <main className="overflow-x-hidden">
       <section className="relative overflow-hidden bg-[linear-gradient(145deg,#120f0d_0%,#3b332e_34%,#ddd3c8_100%)]">
@@ -56,18 +62,19 @@ export default function Home() {
         <div className="relative mx-auto w-full max-w-[1720px] px-4 py-10 sm:px-5 md:px-8 md:py-14 lg:min-h-[calc(100vh-84px)] lg:px-10 lg:py-10">
           <AnimatedSection className="mx-auto max-w-4xl text-center">
             <h1 className="text-5xl font-semibold tracking-tight text-white md:text-7xl md:leading-[1.02]">
-              Premium Custom Home Textiles for Global Brands
+              {t("Premium Custom Home Textiles for Global Brands")}
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/66 md:text-lg">
-              We help brands create high-quality bedding, towels, curtains, and
-              textile collections with flexible OEM &amp; ODM solutions.
+              {t(
+                "We help brands create high-quality bedding, towels, curtains, and textile collections with flexible OEM & ODM solutions."
+              )}
             </p>
             <div className="mt-8 flex items-center justify-center">
               <Link
                 href="/contact#inquiry"
                 className="button-primary bg-white text-stone-950 hover:bg-stone-200"
               >
-                Request Free Quote
+                {t("Request Free Quote")}
               </Link>
             </div>
           </AnimatedSection>
@@ -107,34 +114,80 @@ export default function Home() {
       <AnimatedSection className="bg-[#f7f2ec] py-20 md:py-28">
         <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
           <SectionHeading
-            eyebrow="Collections"
-            title="A smaller editorial selection that supports the hero instead of competing with it."
-            description="The homepage now previews only a tighter set of product categories. The rest can stay on internal pages."
+            eyebrow={t("Collections")}
+            title={t(
+              "A more restrained, image-led collection preview that feels closer to a luxury catalog."
+            )}
+            description={t(
+              "The homepage now introduces only a few collection chapters with real imagery, quieter typography, and a stronger sense of material atmosphere."
+            )}
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {collections.slice(0, 4).map((collection) => (
-              <div
-                key={collection.title}
-                className="overflow-hidden rounded-[1.9rem] border border-stone-200 bg-white shadow-[0_18px_45px_rgba(20,16,12,0.035)]"
+          <div className="mt-12 grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+            {collections.slice(0, 1).map((collection) => (
+              <Link
+                key={collection.slug}
+                href={`/collections/${collection.slug}`}
+                className="group overflow-hidden rounded-[2.3rem] border border-stone-200 bg-white shadow-[0_18px_45px_rgba(20,16,12,0.035)]"
               >
-                <div className={`h-48 bg-gradient-to-br ${collection.accent}`} />
-                <div className="space-y-3 p-5">
-                  <h3 className="text-xl font-semibold text-stone-950">
-                    {collection.title}
-                  </h3>
-                  <p className="text-sm leading-7 text-stone-600">
-                    {collection.description}
-                  </p>
-                  <Link
-                    href="/contact#inquiry"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-stone-900"
-                  >
-                    Request collection details
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
+                <div className="relative h-[460px] overflow-hidden">
+                  <img
+                    src={collection.heroImageUrl}
+                    alt={collection.heroImageAlt}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                    style={{ objectPosition: collection.heroImagePosition }}
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.52))]" />
+                  <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-8">
+                    <p className="text-[11px] uppercase tracking-[0.36em] text-white/68">
+                      {collection.eyebrow}
+                    </p>
+                    <h3 className="mt-4 max-w-xl text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
+                      {collection.title}
+                    </h3>
+                    <p className="mt-4 max-w-xl text-sm leading-7 text-white/78 md:text-base">
+                      {collection.narrative}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
+
+            <div className="grid gap-6">
+              {collections.slice(1, 4).map((collection) => (
+                <Link
+                  key={collection.slug}
+                  href={`/collections/${collection.slug}`}
+                  className="group grid gap-4 overflow-hidden rounded-[2rem] border border-stone-200 bg-white p-4 shadow-[0_18px_45px_rgba(20,16,12,0.035)] md:grid-cols-[220px_1fr] md:p-5"
+                >
+                  <div className="relative h-52 overflow-hidden rounded-[1.5rem]">
+                    <img
+                      src={collection.heroImageUrl}
+                      alt={collection.heroImageAlt}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                      style={{ objectPosition: collection.heroImagePosition }}
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.22))]" />
+                  </div>
+                  <div className="flex flex-col justify-between gap-4 py-1">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.34em] text-stone-400">
+                        {collection.eyebrow}
+                      </p>
+                      <h3 className="mt-3 text-2xl font-semibold tracking-[-0.035em] text-stone-950">
+                        {collection.title}
+                      </h3>
+                      <p className="mt-4 text-sm leading-7 text-stone-600">
+                        {collection.description}
+                      </p>
+                    </div>
+                    <div className="inline-flex items-center gap-2 text-sm font-semibold text-stone-900">
+                      {t("Explore Collection Story")}
+                      <ArrowRight className="h-4 w-4" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </AnimatedSection>
@@ -144,9 +197,13 @@ export default function Home() {
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
               <SectionHeading
-                eyebrow="Factory Strength"
-                title="A factory presentation that shows real capability, not just a generic supplier claim."
-                description="This section brings together facility scale, daily production flow, and certification proof so buyers can quickly understand how the factory operates."
+                eyebrow={t("Factory Strength")}
+                title={t(
+                  "A factory presentation that shows real capability, not just a generic supplier claim."
+                )}
+                description={t(
+                  "This section brings together facility scale, daily production flow, and certification proof so buyers can quickly understand how the factory operates."
+                )}
               />
               <div className="mt-10 grid gap-4 sm:grid-cols-2">
                 {factoryStrengthMetrics.map((metric) => (
@@ -165,7 +222,7 @@ export default function Home() {
               </div>
               <div className="mt-6 rounded-[2rem] border border-stone-200 bg-stone-950 p-6 text-white md:p-7">
                 <p className="text-xs uppercase tracking-[0.32em] text-white/55">
-                  Daily Factory Flow
+                  {t("Daily Factory Flow")}
                 </p>
                 <div className="mt-6 grid gap-4">
                   {factoryScenes.map((scene) => {
@@ -195,7 +252,7 @@ export default function Home() {
                   href="/factory-plog"
                   className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white"
                 >
-                  View Factory Plog
+                  {t("View Factory Plog")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -205,10 +262,12 @@ export default function Home() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.32em] text-stone-500">
-                    Compliance & Workflow
+                    {t("Compliance & Workflow")}
                   </p>
                   <h3 className="mt-3 text-2xl font-semibold text-stone-950 md:text-3xl">
-                    Certifications and process discipline presented in one block.
+                    {t(
+                      "Certifications and process discipline presented in one block."
+                    )}
                   </h3>
                 </div>
               </div>
@@ -219,7 +278,7 @@ export default function Home() {
                     className="rounded-[1.45rem] border border-stone-200 bg-white p-5"
                   >
                     <p className="text-xs uppercase tracking-[0.28em] text-stone-500">
-                      Certified
+                      {t("Certified")}
                     </p>
                     <p className="mt-3 text-lg font-semibold text-stone-950">
                       {certification.name}
@@ -232,7 +291,7 @@ export default function Home() {
               </div>
               <div className="mt-8 rounded-[1.7rem] border border-stone-200 bg-white p-5 md:p-6">
                 <p className="text-sm font-semibold uppercase tracking-[0.28em] text-stone-500">
-                  Enterprise Routine
+                  {t("Enterprise Routine")}
                 </p>
                 <div className="mt-6 grid gap-4">
                   {processSteps.slice(0, 5).map((step, index) => (
@@ -264,9 +323,11 @@ export default function Home() {
         <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
             <SectionHeading
-              eyebrow="OEM & ODM"
-              title="Customization and workflow reduced to the essentials."
-              description="Homepage information stays focused on the capabilities buyers need first."
+              eyebrow={t("OEM & ODM")}
+              title={t("Customization and workflow reduced to the essentials.")}
+              description={t(
+                "Homepage information stays focused on the capabilities buyers need first."
+              )}
             />
             <div className="mt-10 grid gap-4">
               {customizationServices.slice(0, 3).map((service) => {
@@ -296,7 +357,7 @@ export default function Home() {
 
           <div className="rounded-[2.25rem] border border-stone-200 bg-white p-6 md:p-8">
             <p className="text-xs uppercase tracking-[0.32em] text-stone-500">
-              Process
+              {t("Process")}
             </p>
             <div className="mt-8 grid gap-4">
               {processSteps.slice(0, 4).map((step, index) => (
@@ -326,13 +387,17 @@ export default function Home() {
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
             <SectionHeading
-              eyebrow="Buyer Confidence"
-              title="Social proof and long-term cooperation reasons stay focused on buyer reassurance."
-              description="With certifications moved into the factory block, this section stays dedicated to client confidence, retention, and sourcing comfort."
+              eyebrow={t("Buyer Confidence")}
+              title={t(
+                "Social proof and long-term cooperation reasons stay focused on buyer reassurance."
+              )}
+              description={t(
+                "With certifications moved into the factory block, this section stays dedicated to client confidence, retention, and sourcing comfort."
+              )}
             />
             <div className="mt-10 rounded-[1.75rem] border border-stone-200 bg-[#f7f2ec] p-6">
               <p className="text-sm font-semibold text-stone-950">
-                Why buyers stay with us
+                {t("Why buyers stay with us")}
               </p>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-stone-600">
                 {whyPartnerPoints.slice(0, 3).map((point) => (
@@ -344,7 +409,7 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <TestimonialCarousel items={testimonials} />
+          <TestimonialCarousel items={testimonials} locale={locale} />
         </div>
       </AnimatedSection>
 
@@ -352,9 +417,11 @@ export default function Home() {
         <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <SectionHeading
-              eyebrow="Inquiry System"
-              title="The homepage now ends with one clear conversion target."
-              description="Less noise around the form makes the final action feel more direct: submit requirements and move into WhatsApp conversation."
+              eyebrow={t("Inquiry System")}
+              title={t("The homepage now ends with one clear conversion target.")}
+              description={t(
+                "Less noise around the form makes the final action feel more direct: submit requirements and move into WhatsApp conversation."
+              )}
             />
             <div className="mt-10 grid gap-4">
               {contactDetails.map((detail) => {
@@ -384,23 +451,25 @@ export default function Home() {
             </div>
           </div>
 
-          <InquiryForm />
+          <InquiryForm locale={locale} />
         </div>
       </AnimatedSection>
 
       <AnimatedSection className="mx-auto w-full max-w-7xl px-5 py-20 md:px-8 md:py-24">
         <div className="rounded-[2.5rem] bg-stone-950 px-6 py-10 text-white md:px-10">
           <p className="text-xs uppercase tracking-[0.32em] text-stone-300">
-            Final CTA
+            {t("Final CTA")}
           </p>
           <h2 className="mt-5 max-w-3xl text-3xl font-semibold md:text-5xl">
-            Start your custom textile collection with a partner built for long-term business.
+            {t(
+              "Start your custom textile collection with a partner built for long-term business."
+            )}
           </h2>
           <Link
             href="/contact#inquiry"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-stone-950 transition hover:bg-stone-200"
           >
-            Talk to Our Factory Team
+            {t("Talk to Our Factory Team")}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

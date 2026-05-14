@@ -7,6 +7,7 @@ import {
   SiteFooter,
   SiteHeader,
 } from "@/components/site-chrome";
+import { getLocale } from "@/lib/get-locale";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -37,21 +38,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="en"
+      lang={locale === "zh" ? "zh-CN" : "en"}
       className={`${manrope.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-[#fbf8f4] text-stone-900">
-        <SiteHeader />
+        <SiteHeader locale={locale} />
         {children}
-        <SiteFooter />
-        <FloatingWhatsApp />
+        <SiteFooter locale={locale} />
+        <FloatingWhatsApp locale={locale} />
       </body>
     </html>
   );

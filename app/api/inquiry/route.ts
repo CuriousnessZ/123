@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { normalizeLocale, translateText } from "@/lib/i18n";
 import { whatsappNumber } from "@/lib/site-data";
 
 type UploadedFile = {
@@ -47,28 +48,31 @@ function getUploadedFiles(formData: FormData): UploadedFile[] {
     }));
 }
 
-function buildWhatsAppSummary(record: InquiryRecord) {
+function buildWhatsAppSummary(record: InquiryRecord, locale: "en" | "zh") {
+  const t = (text: string) => translateText(locale, text);
   const lines = [
-    "Hello, I would like a quotation for a custom home textile project.",
+    t("Hello, I would like a quotation for a custom home textile project."),
     "",
-    `Name: ${record.name}`,
-    `Company: ${record.companyName}`,
-    `Email: ${record.email}`,
+    `${t("Name")}: ${record.name}`,
+    `${t("Company")}: ${record.companyName}`,
+    `${t("Email")}: ${record.email}`,
     `WhatsApp: ${record.whatsAppNumber}`,
-    `Country: ${record.country}`,
-    `Category: ${record.productCategory}`,
-    `Estimated Quantity: ${record.estimatedQuantity}`,
-    `Fabric Preference: ${record.fabricPreference || "Not specified"}`,
-    `Target Market: ${record.targetMarket}`,
-    `Logo Needed: ${record.logoNeeded}`,
-    `Packaging Customization: ${record.packagingCustomization}`,
-    `Newsletter Updates: ${record.newsletterOptIn}`,
-    `Additional Requirements: ${record.additionalRequirements || "None"}`,
+    `${t("Country")}: ${record.country}`,
+    `${t("Category")}: ${record.productCategory}`,
+    `${t("Estimated Quantity")}: ${record.estimatedQuantity}`,
+    `${t("Fabric Preference")}: ${record.fabricPreference || t("Not specified")}`,
+    `${t("Target Market")}: ${record.targetMarket}`,
+    `${t("Logo Needed")}: ${record.logoNeeded}`,
+    `${t("Packaging Customization")}: ${record.packagingCustomization}`,
+    `${t("Newsletter Updates")}: ${record.newsletterOptIn}`,
+    `${t("Additional Requirements")}: ${record.additionalRequirements || t("None")}`,
   ];
 
   if (record.files.length > 0) {
     lines.push(
-      `Uploaded Files: ${record.files.map((file) => file.originalName).join(", ")}`
+      `${t("Uploaded Files")}: ${record.files
+        .map((file) => file.originalName)
+        .join(", ")}`
     );
   }
 
@@ -79,6 +83,7 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const files = getUploadedFiles(formData);
+    const locale = normalizeLocale(getString(formData, "locale"));
 
     const record: InquiryRecord = {
       name: getString(formData, "name"),
@@ -110,13 +115,13 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           success: false,
-          message: "Please complete all required inquiry fields.",
+          message: translateText(locale, "Please complete all required inquiry fields."),
         },
         { status: 400 }
       );
     }
 
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildWhatsAppSummary(record))}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildWhatsAppSummary(record, locale))}`;
 
     return NextResponse.json({
       success: true,
@@ -126,7 +131,10 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: false,
-        message: "Unable to process inquiry right now. Please try again.",
+        message: translateText(
+          "en",
+          "Unable to process inquiry right now. Please try again."
+        ),
       },
       { status: 500 }
     );

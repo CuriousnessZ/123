@@ -5,11 +5,11 @@ import { ArrowRight, Pin, ShieldCheck } from "lucide-react";
 import { AnimatedSection } from "@/components/animated-section";
 import { ManufacturingJournalFeed } from "@/components/manufacturing-journal-feed";
 import {
-  featuredManufacturingJournalPost,
   formatJournalDate,
-  manufacturingJournalTags,
-  publishedManufacturingJournalPosts,
-} from "@/lib/manufacturing-journal";
+  getLocalizedJournalData,
+} from "@/lib/localized-journal";
+import { getLocale } from "@/lib/get-locale";
+import { createTranslator } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -23,7 +23,17 @@ const journalStats = [
   { value: "Infinite", label: "Scrollable story feed with tag filtering" },
 ];
 
-export default function ManufacturingJournalPage() {
+export default async function ManufacturingJournalPage() {
+  const locale = await getLocale();
+  const t = createTranslator(locale);
+  const { featuredPost, publishedPosts, tags } = await getLocalizedJournalData(
+    locale
+  );
+
+  if (!featuredPost) {
+    return <main className="bg-[#fbf8f4]" />;
+  }
+
   return (
     <main className="bg-[#fbf8f4]">
       <section className="relative min-h-[92vh] overflow-hidden bg-stone-950 text-white">
@@ -42,23 +52,21 @@ export default function ManufacturingJournalPage() {
           <div className="w-full space-y-10">
             <div className="max-w-4xl">
               <p className="text-xs uppercase tracking-[0.34em] text-white/55">
-                About Us
+                {t("About Us")}
               </p>
               <h1 className="mt-5 text-5xl font-semibold tracking-tight md:text-7xl md:leading-[1.02]">
-                A modern manufacturing journal for a premium home textile factory.
+                {t(
+                  "A modern manufacturing journal for a premium home textile factory."
+                )}
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-8 text-white/72 md:text-lg">
-                Built with an industrial documentary aesthetic, this page turns
-                the factory into an editorial story: real projects, process
-                moments, quality checkpoints, shipment logic, and the rhythm of
-                production itself.
+                {t(
+                  "Built with an industrial documentary aesthetic, this page turns the factory into an editorial story: real projects, process moments, quality checkpoints, shipment logic, and the rhythm of production itself."
+                )}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Link href="#featured-project" className="button-primary">
-                  Explore Featured Story
-                </Link>
-                <Link href="/admin/journal" className="button-secondary border-white/25 bg-white/10 text-white hover:bg-white/16">
-                  Open Admin Scaffold
+                  {t("Explore Featured Story")}
                 </Link>
               </div>
             </div>
@@ -88,44 +96,50 @@ export default function ManufacturingJournalPage() {
       >
         <div className="mb-8 flex items-center gap-3 text-xs uppercase tracking-[0.32em] text-stone-500">
           <Pin className="h-4 w-4" />
-          Pinned Featured Project
+          {t("Pinned Featured Project")}
         </div>
         <div className="overflow-hidden rounded-[2.5rem] border border-stone-200 bg-white shadow-[0_28px_90px_rgba(18,16,12,0.08)]">
           <div className="flex flex-col">
             <div className="relative min-h-[420px] overflow-hidden bg-stone-950">
-              {featuredManufacturingJournalPost.videoUrl ? (
+              {featuredPost.videoUrl ? (
                 <video
                   className="absolute inset-0 h-full w-full object-cover opacity-70"
-                  src={featuredManufacturingJournalPost.videoUrl}
+                  src={featuredPost.videoUrl}
                   autoPlay
                   muted
                   loop
                   playsInline
                 />
+              ) : featuredPost.coverImageUrl ? (
+                <img
+                  className="absolute inset-0 h-full w-full object-cover opacity-80"
+                  src={featuredPost.coverImageUrl}
+                  alt={featuredPost.title}
+                />
               ) : (
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${featuredManufacturingJournalPost.coverAccent}`}
+                  className={`absolute inset-0 bg-gradient-to-br ${featuredPost.coverAccent}`}
                 />
               )}
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.16),rgba(0,0,0,0.72))]" />
               <div className="absolute left-6 top-6 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">
-                Featured Story
+                {t("Featured Story")}
               </div>
             </div>
             <div className="p-6 md:p-10">
               <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-stone-500">
-                <span>{featuredManufacturingJournalPost.coverLabel}</span>
-                <span>{formatJournalDate(featuredManufacturingJournalPost.publishedAt)}</span>
-                <span>{featuredManufacturingJournalPost.readTime}</span>
+                <span>{featuredPost.coverLabel}</span>
+                <span>{formatJournalDate(locale, featuredPost.publishedAt)}</span>
+                <span>{featuredPost.readTime}</span>
               </div>
               <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl">
-                {featuredManufacturingJournalPost.title}
+                {featuredPost.title}
               </h2>
               <p className="mt-6 max-w-2xl text-base leading-8 text-stone-600">
-                {featuredManufacturingJournalPost.heroSummary}
+                {featuredPost.heroSummary}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
-                {featuredManufacturingJournalPost.tags.map((tag) => (
+                {featuredPost.tags.map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full border border-stone-200 bg-[#f7f2ec] px-3 py-1 text-xs text-stone-600"
@@ -135,7 +149,7 @@ export default function ManufacturingJournalPage() {
                 ))}
               </div>
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                {featuredManufacturingJournalPost.metrics.slice(0, 4).map((metric) => (
+                {featuredPost.metrics.slice(0, 4).map((metric) => (
                   <div
                     key={metric.label}
                     className="rounded-[1.5rem] border border-stone-200 bg-[#fcfaf7] p-4"
@@ -150,10 +164,10 @@ export default function ManufacturingJournalPage() {
                 ))}
               </div>
               <Link
-                href={`/about-us/${featuredManufacturingJournalPost.slug}`}
+                href={`/about-us/${featuredPost.slug}`}
                 className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-stone-900"
               >
-                Read Full Story
+                {t("Read Full Story")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -166,35 +180,37 @@ export default function ManufacturingJournalPage() {
           <div className="space-y-10">
             <div className="max-w-4xl">
               <p className="text-xs uppercase tracking-[0.34em] text-stone-500">
-                Manufacturing Feed
+                {t("Manufacturing Feed")}
               </p>
               <h2 className="mt-5 text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl">
-                Scroll through factory stories with a cinematic editorial rhythm.
+                {t(
+                  "Scroll through factory stories with a cinematic editorial rhythm."
+                )}
               </h2>
               <p className="mt-6 max-w-xl text-base leading-8 text-stone-600">
-                Inspired by Medium, LinkedIn, and Apple-style manufacturing
-                storytelling, the feed emphasizes process clarity, material
-                quality, and shipment realism while keeping the premium site
-                language intact.
+                {t(
+                  "Inspired by Medium, LinkedIn, and Apple-style manufacturing storytelling, the feed emphasizes process clarity, material quality, and shipment realism while keeping the premium site language intact."
+                )}
               </p>
               <div className="mt-8 rounded-[1.8rem] border border-stone-200 bg-white p-6">
                 <div className="flex items-center gap-3">
                   <ShieldCheck className="h-4 w-4 text-stone-900" />
                   <p className="text-sm font-semibold text-stone-950">
-                    Journal system scaffold
+                    {t("Journal system scaffold")}
                   </p>
                 </div>
                 <p className="mt-3 text-sm leading-7 text-stone-600">
-                  Public reading experience is ready now. Admin-only posting,
-                  image uploads, video embedding, drafts, pinned stories, and
-                  Supabase-based publishing are scaffolded in the admin route.
+                  {t(
+                    "Public reading experience is ready now. Admin-only posting, image uploads, video embedding, drafts, pinned stories, and Supabase-based publishing are scaffolded in the admin route."
+                  )}
                 </p>
               </div>
             </div>
 
             <ManufacturingJournalFeed
-              posts={publishedManufacturingJournalPosts}
-              tags={manufacturingJournalTags}
+              posts={publishedPosts}
+              tags={tags}
+              locale={locale}
             />
           </div>
         </div>

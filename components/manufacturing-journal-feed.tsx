@@ -5,12 +5,14 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import type { Locale } from "@/lib/i18n";
+import { createTranslator, formatDateByLocale } from "@/lib/i18n";
 import type { JournalPost } from "@/lib/manufacturing-journal";
-import { formatJournalDate } from "@/lib/manufacturing-journal";
 
 type ManufacturingJournalFeedProps = {
   posts: JournalPost[];
   tags: string[];
+  locale: Locale;
 };
 
 const INITIAL_VISIBLE = 4;
@@ -19,22 +21,29 @@ const PAGE_SIZE = 2;
 export function ManufacturingJournalFeed({
   posts,
   tags,
+  locale,
 }: ManufacturingJournalFeedProps) {
-  const [activeTag, setActiveTag] = useState("All");
+  const t = createTranslator(locale);
+  const allLabel = t("All");
+  const [activeTag, setActiveTag] = useState(allLabel);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   const filteredPosts = useMemo(() => {
-    if (activeTag === "All") {
+    if (activeTag === allLabel) {
       return posts;
     }
 
     return posts.filter((post) => post.tags.includes(activeTag));
-  }, [activeTag, posts]);
+  }, [activeTag, allLabel, posts]);
 
   useEffect(() => {
     setVisibleCount(INITIAL_VISIBLE);
   }, [activeTag]);
+
+  useEffect(() => {
+    setActiveTag(allLabel);
+  }, [allLabel]);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -67,7 +76,7 @@ export function ManufacturingJournalFeed({
   return (
     <div className="space-y-10">
       <div className="flex flex-wrap gap-3">
-        {["All", ...tags].map((tag) => {
+        {[allLabel, ...tags].map((tag) => {
           const isActive = tag === activeTag;
 
           return (
@@ -108,7 +117,7 @@ export function ManufacturingJournalFeed({
               <div className="p-6 md:p-8">
                 <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-stone-500">
                   <span>{post.coverLabel}</span>
-                  <span>{formatJournalDate(post.publishedAt)}</span>
+                  <span>{formatDateByLocale(locale, post.publishedAt)}</span>
                   <span>{post.readTime}</span>
                 </div>
                 <h3 className="mt-5 text-2xl font-semibold tracking-tight text-stone-950 md:text-3xl">
@@ -131,7 +140,7 @@ export function ManufacturingJournalFeed({
                   href={`/about-us/${post.slug}`}
                   className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-stone-900"
                 >
-                  Read Full Story
+                  {t("Read Full Story")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -142,7 +151,7 @@ export function ManufacturingJournalFeed({
 
       {filteredPosts.length === 0 ? (
         <div className="rounded-[1.75rem] border border-dashed border-stone-300 bg-white p-8 text-center text-sm text-stone-500">
-          No stories match this tag yet.
+          {t("No stories match this tag yet.")}
         </div>
       ) : null}
 
@@ -159,7 +168,7 @@ export function ManufacturingJournalFeed({
             }
             className="rounded-full border border-stone-200 bg-white px-5 py-3 text-sm font-semibold text-stone-900 hover:border-stone-900"
           >
-            Load More Stories
+            {t("Load More Stories")}
           </button>
         </div>
       ) : null}

@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { ManufacturingJournalAdmin } from "@/components/manufacturing-journal-admin";
-import { manufacturingJournalPosts } from "@/lib/manufacturing-journal";
+import {
+  getAdminPasswordSource,
+  getAdminRecoveryInstructions,
+  getAuthenticatedAdmin,
+  isAdminAuthConfigured,
+} from "@/lib/admin-session";
+import { getStoredJournalPosts } from "@/lib/journal-store";
 import { getSupabaseConfig } from "@/lib/supabase-env";
 
 export const metadata: Metadata = {
@@ -11,8 +18,16 @@ export const metadata: Metadata = {
     "Admin-only manufacturing journal scaffold with Supabase-ready posting workflow, draft/publish control, uploads, and rich text editing.",
 };
 
-export default function ManufacturingJournalAdminPage() {
+export default async function ManufacturingJournalAdminPage() {
+  const admin = await getAuthenticatedAdmin();
+
+  if (!admin) {
+    redirect("/admin/login?next=/admin/journal");
+  }
+
   const { isConfigured, adminEmails } = getSupabaseConfig();
+  const posts = await getStoredJournalPosts();
+  const recovery = getAdminRecoveryInstructions();
 
   return (
     <main className="bg-[#fbf8f4]">
@@ -25,20 +40,28 @@ export default function ManufacturingJournalAdminPage() {
             A premium publishing backend scaffold for industrial documentary storytelling.
           </h1>
           <p className="mt-6 max-w-3xl text-base leading-8 text-white/70 md:text-lg">
-            This admin route is prepared for Supabase Auth, database-backed post
-            storage, image uploads, video embedding, and role-restricted
-            publishing. It keeps the same dark-and-white visual language as the
-            public journal so the whole experience feels like one coherent
-            system.
+            This admin route is protected by a signed session and reserved for
+            internal publishing. Post status, pinning, image uploads, gallery
+            uploads, and video publishing all stay behind the admin wall rather
+            than being exposed on the public browsing experience.
           </p>
+          {!isAdminAuthConfigured() ? (
+            <p className="mt-4 text-sm text-amber-300">
+              Set `JOURNAL_ADMIN_PASSWORD` and `JOURNAL_ADMIN_SESSION_SECRET`
+              before using this admin channel.
+            </p>
+          ) : null}
         </div>
       </section>
 
       <AnimatedSection className="mx-auto w-full max-w-7xl px-5 py-16 md:px-8 md:py-20">
         <ManufacturingJournalAdmin
-          posts={manufacturingJournalPosts}
+          posts={posts}
           isSupabaseConfigured={isConfigured}
           adminEmails={adminEmails}
+          adminUsername={admin.username}
+          passwordSource={getAdminPasswordSource()}
+          recoveryInfo={recovery}
         />
       </AnimatedSection>
     </main>

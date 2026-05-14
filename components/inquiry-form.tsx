@@ -3,6 +3,9 @@
 import { ArrowRight, LoaderCircle, Paperclip, UploadCloud } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import type { Locale } from "@/lib/i18n";
+import { createTranslator } from "@/lib/i18n";
+
 type InquiryResponse = {
   success: boolean;
   whatsappUrl?: string;
@@ -39,21 +42,24 @@ const marketOptions = [
 function FieldLabel({
   label,
   optional,
+  optionalLabel = "Optional",
 }: {
   label: string;
   optional?: boolean;
+  optionalLabel?: string;
 }) {
   return (
     <label className="mb-2 block text-sm font-medium text-stone-800">
       {label}
       {optional ? (
-        <span className="ml-1 text-stone-500">(Optional)</span>
+        <span className="ml-1 text-stone-500">({optionalLabel})</span>
       ) : null}
     </label>
   );
 }
 
-export function InquiryForm() {
+export function InquiryForm({ locale }: { locale: Locale }) {
+  const t = createTranslator(locale);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [selectedFiles, setSelectedFiles] = useState({
@@ -70,11 +76,13 @@ export function InquiryForm() {
 
   const fileSummary = useMemo(() => {
     if (totalSelectedFiles === 0) {
-      return "Upload reference images, tech packs, or PDFs";
+      return t("Upload reference images, tech packs, or PDFs");
     }
 
-    return `${totalSelectedFiles} file${totalSelectedFiles > 1 ? "s" : ""} selected`;
-  }, [totalSelectedFiles]);
+    return locale === "zh"
+      ? `已选择 ${totalSelectedFiles} 个文件`
+      : `${totalSelectedFiles} file${totalSelectedFiles > 1 ? "s" : ""} selected`;
+  }, [locale, t, totalSelectedFiles]);
 
   function updateFileCount(
     field:
@@ -103,16 +111,16 @@ export function InquiryForm() {
       const result = (await response.json()) as InquiryResponse;
 
       if (!response.ok || !result.success || !result.whatsappUrl) {
-        throw new Error(result.message || "Unable to submit your inquiry.");
+        throw new Error(result.message || t("Unable to submit your inquiry."));
       }
 
-      setFeedback("Opening WhatsApp with your inquiry summary...");
+      setFeedback(t("Opening WhatsApp with your inquiry summary..."));
       window.location.href = result.whatsappUrl;
     } catch (error) {
       setFeedback(
         error instanceof Error
           ? error.message
-          : "Something went wrong while sending your inquiry."
+          : t("Something went wrong while sending your inquiry.")
       );
     } finally {
       setIsSubmitting(false);
@@ -124,100 +132,103 @@ export function InquiryForm() {
       action={handleSubmit}
       className="space-y-6 rounded-[2rem] border border-white/70 bg-white/92 p-6 shadow-[0_30px_80px_rgba(20,16,12,0.08)] backdrop-blur md:p-8"
     >
+      <input type="hidden" name="locale" value={locale} />
       <div className="grid gap-5 md:grid-cols-2">
         <div>
-          <FieldLabel label="Name" />
-          <input name="name" required className="input-field" placeholder="Your full name" />
+          <FieldLabel label={t("Name")} />
+          <input name="name" required className="input-field" placeholder={t("Your full name")} />
         </div>
         <div>
-          <FieldLabel label="Company Name" />
-          <input name="companyName" required className="input-field" placeholder="Your company" />
+          <FieldLabel label={t("Company Name")} />
+          <input name="companyName" required className="input-field" placeholder={t("Your company")} />
         </div>
         <div>
-          <FieldLabel label="Email" />
-          <input name="email" type="email" required className="input-field" placeholder="name@company.com" />
+          <FieldLabel label={t("Email")} />
+          <input name="email" type="email" required className="input-field" placeholder={t("name@company.com")} />
         </div>
         <div>
-          <FieldLabel label="WhatsApp Number" />
-          <input name="whatsAppNumber" required className="input-field" placeholder="+1 234 567 890" />
+          <FieldLabel label={t("WhatsApp Number")} />
+          <input name="whatsAppNumber" required className="input-field" placeholder={t("+1 234 567 890")} />
         </div>
         <div>
-          <FieldLabel label="Country" />
-          <input name="country" required className="input-field" placeholder="Target country / region" />
+          <FieldLabel label={t("Country")} />
+          <input name="country" required className="input-field" placeholder={t("Target country / region")} />
         </div>
         <div>
-          <FieldLabel label="Product Category" />
+          <FieldLabel label={t("Product Category")} />
           <select name="productCategory" defaultValue="" required className="input-field">
             <option value="" disabled>
-              Select a category
+              {t("Select a category")}
             </option>
             {categoryOptions.map((option) => (
               <option key={option} value={option}>
-                {option}
+                {t(option)}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <FieldLabel label="Estimated Quantity" />
+          <FieldLabel label={t("Estimated Quantity")} />
           <select name="estimatedQuantity" defaultValue="" required className="input-field">
             <option value="" disabled>
-              Select an estimate
+              {t("Select an estimate")}
             </option>
             {quantityOptions.map((option) => (
               <option key={option} value={option}>
-                {option}
+                {t(option)}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <FieldLabel label="Fabric Preference" />
-          <input name="fabricPreference" className="input-field" placeholder="Washed cotton, sateen, microfiber..." />
+          <FieldLabel label={t("Fabric Preference")} />
+          <input name="fabricPreference" className="input-field" placeholder={t("Washed cotton, sateen, microfiber...")} />
         </div>
         <div>
-          <FieldLabel label="Target Market" />
+          <FieldLabel label={t("Target Market")} />
           <select name="targetMarket" defaultValue="" required className="input-field">
             <option value="" disabled>
-              Select your channel
+              {t("Select your channel")}
             </option>
             {marketOptions.map((option) => (
               <option key={option} value={option}>
-                {option}
+                {t(option)}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <FieldLabel label="Logo Needed?" />
-          <select name="logoNeeded" defaultValue="Yes" className="input-field">
-            <option>Yes</option>
-            <option>No</option>
+          <FieldLabel label={t("Logo Needed?")} />
+          <select name="logoNeeded" defaultValue={t("Yes")} className="input-field">
+            <option>{t("Yes")}</option>
+            <option>{t("No")}</option>
           </select>
         </div>
         <div>
-          <FieldLabel label="Packaging Customization?" />
-          <select name="packagingCustomization" defaultValue="Yes" className="input-field">
-            <option>Yes</option>
-            <option>No</option>
+          <FieldLabel label={t("Packaging Customization?")} />
+          <select name="packagingCustomization" defaultValue={t("Yes")} className="input-field">
+            <option>{t("Yes")}</option>
+            <option>{t("No")}</option>
           </select>
         </div>
         <div>
-          <FieldLabel label="Newsletter Updates" optional />
-          <select name="newsletterOptIn" defaultValue="Yes" className="input-field">
-            <option>Yes</option>
-            <option>No</option>
+          <FieldLabel label={t("Newsletter Updates")} optional optionalLabel={t("Optional")} />
+          <select name="newsletterOptIn" defaultValue={t("Yes")} className="input-field">
+            <option>{t("Yes")}</option>
+            <option>{t("No")}</option>
           </select>
         </div>
       </div>
 
       <div>
-        <FieldLabel label="Additional Requirements" />
+        <FieldLabel label={t("Additional Requirements")} />
         <textarea
           name="additionalRequirements"
           rows={5}
           className="input-field min-h-32 resize-none"
-          placeholder="Share product specs, certifications, packaging goals, target pricing, lead time needs, or any other sourcing details."
+          placeholder={t(
+            "Share product specs, certifications, packaging goals, target pricing, lead time needs, or any other sourcing details."
+          )}
         />
       </div>
 
@@ -227,13 +238,13 @@ export function InquiryForm() {
             <UploadCloud className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-medium text-stone-900">Upload buyer files</p>
+            <p className="text-sm font-medium text-stone-900">{t("Upload buyer files")}</p>
             <p className="text-sm text-stone-600">{fileSummary}</p>
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <FieldLabel label="Image Upload" optional />
+            <FieldLabel label={t("Image Upload")} optional optionalLabel={t("Optional")} />
             <input
               name="imageUpload"
               type="file"
@@ -245,7 +256,7 @@ export function InquiryForm() {
             />
           </div>
           <div>
-            <FieldLabel label="Reference Image Upload" optional />
+            <FieldLabel label={t("Reference Image Upload")} optional optionalLabel={t("Optional")} />
             <input
               name="referenceImageUpload"
               type="file"
@@ -261,7 +272,7 @@ export function InquiryForm() {
             />
           </div>
           <div>
-            <FieldLabel label="Tech Pack Upload" optional />
+            <FieldLabel label={t("Tech Pack Upload")} optional optionalLabel={t("Optional")} />
             <input
               name="techPackUpload"
               type="file"
@@ -276,7 +287,7 @@ export function InquiryForm() {
             />
           </div>
           <div>
-            <FieldLabel label="PDF Upload" optional />
+            <FieldLabel label={t("PDF Upload")} optional optionalLabel={t("Optional")} />
             <input
               name="pdfUpload"
               type="file"
@@ -293,7 +304,9 @@ export function InquiryForm() {
       <div className="flex flex-col gap-4 border-t border-stone-200 pt-6 text-sm text-stone-600 md:flex-row md:items-center md:justify-between">
         <p className="flex items-center gap-2">
           <Paperclip className="h-4 w-4" />
-          Your inquiry summary is prepared for WhatsApp. Uploaded files are not stored online in this display-site version.
+          {t(
+            "Your inquiry summary is prepared for WhatsApp. Uploaded files are not stored online in this display-site version."
+          )}
         </p>
         <button
           type="submit"
@@ -303,11 +316,11 @@ export function InquiryForm() {
           {isSubmitting ? (
             <>
               <LoaderCircle className="h-4 w-4 animate-spin" />
-              Sending Inquiry
+              {t("Sending Inquiry")}
             </>
           ) : (
             <>
-              Get Instant Quotation
+              {t("Get Instant Quotation")}
               <ArrowRight className="h-4 w-4" />
             </>
           )}
