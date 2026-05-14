@@ -8,6 +8,7 @@ import { getLocalizedSiteData } from "@/lib/localized-site-data";
 import { whatsappNumber } from "@/lib/site-data";
 
 const headerNavItems = [
+  { label: "Home", href: "/" },
   { label: "Collections", href: "/collections" },
   { label: "Journal", href: "/about-us" },
 ];

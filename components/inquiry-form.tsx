@@ -58,6 +58,56 @@ function FieldLabel({
   );
 }
 
+function UploadField({
+  name,
+  accept,
+  multiple,
+  label,
+  optionalLabel,
+  buttonLabel,
+  emptyLabel,
+  countLabel,
+  onFileCountChange,
+}: {
+  name: string;
+  accept: string;
+  multiple?: boolean;
+  label: string;
+  optionalLabel: string;
+  buttonLabel: string;
+  emptyLabel: string;
+  countLabel: (count: number) => string;
+  onFileCountChange: (count: number) => void;
+}) {
+  const [selectedCount, setSelectedCount] = useState(0);
+
+  return (
+    <div>
+      <FieldLabel label={label} optional optionalLabel={optionalLabel} />
+      <label className="flex cursor-pointer items-center justify-between gap-3 rounded-[1.15rem] border border-dashed border-stone-300 bg-white px-4 py-3 text-sm text-stone-600 transition hover:border-stone-900">
+        <span className="inline-flex shrink-0 items-center rounded-full bg-stone-900 px-4 py-2 text-sm font-medium text-white">
+          {buttonLabel}
+        </span>
+        <span className="min-w-0 truncate text-right text-sm text-stone-500">
+          {selectedCount > 0 ? countLabel(selectedCount) : emptyLabel}
+        </span>
+        <input
+          name={name}
+          type="file"
+          accept={accept}
+          multiple={multiple}
+          className="sr-only"
+          onChange={(event) => {
+            const count = event.target.files?.length ?? 0;
+            setSelectedCount(count);
+            onFileCountChange(count);
+          }}
+        />
+      </label>
+    </div>
+  );
+}
+
 export function InquiryForm({ locale }: { locale: Locale }) {
   const t = createTranslator(locale);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -243,61 +293,57 @@ export function InquiryForm({ locale }: { locale: Locale }) {
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <div>
-            <FieldLabel label={t("Image Upload")} optional optionalLabel={t("Optional")} />
-            <input
-              name="imageUpload"
-              type="file"
-              accept="image/*"
-              className="file-field"
-              onChange={(event) =>
-                updateFileCount("imageUpload", event.target.files?.length ?? 0)
-              }
-            />
-          </div>
-          <div>
-            <FieldLabel label={t("Reference Image Upload")} optional optionalLabel={t("Optional")} />
-            <input
-              name="referenceImageUpload"
-              type="file"
-              accept="image/*"
-              multiple
-              className="file-field"
-              onChange={(event) =>
-                updateFileCount(
-                  "referenceImageUpload",
-                  event.target.files?.length ?? 0
-                )
-              }
-            />
-          </div>
-          <div>
-            <FieldLabel label={t("Tech Pack Upload")} optional optionalLabel={t("Optional")} />
-            <input
-              name="techPackUpload"
-              type="file"
-              accept=".pdf,.ai,.psd,.doc,.docx,.xls,.xlsx,.zip"
-              className="file-field"
-              onChange={(event) =>
-                updateFileCount(
-                  "techPackUpload",
-                  event.target.files?.length ?? 0
-                )
-              }
-            />
-          </div>
-          <div>
-            <FieldLabel label={t("PDF Upload")} optional optionalLabel={t("Optional")} />
-            <input
-              name="pdfUpload"
-              type="file"
-              accept=".pdf"
-              className="file-field"
-              onChange={(event) =>
-                updateFileCount("pdfUpload", event.target.files?.length ?? 0)
-              }
-            />
-          </div>
+          <UploadField
+            name="imageUpload"
+            accept="image/*"
+            label={t("Image Upload")}
+            optionalLabel={t("Optional")}
+            buttonLabel={t("Choose File")}
+            emptyLabel={t("No file selected")}
+            countLabel={(count) =>
+              locale === "zh" ? `已选择 ${count} 个文件` : `${count} file${count > 1 ? "s" : ""} selected`
+            }
+            onFileCountChange={(count) => updateFileCount("imageUpload", count)}
+          />
+          <UploadField
+            name="referenceImageUpload"
+            accept="image/*"
+            multiple
+            label={t("Reference Image Upload")}
+            optionalLabel={t("Optional")}
+            buttonLabel={t("Choose Files")}
+            emptyLabel={t("No file selected")}
+            countLabel={(count) =>
+              locale === "zh" ? `已选择 ${count} 个文件` : `${count} file${count > 1 ? "s" : ""} selected`
+            }
+            onFileCountChange={(count) =>
+              updateFileCount("referenceImageUpload", count)
+            }
+          />
+          <UploadField
+            name="techPackUpload"
+            accept=".pdf,.ai,.psd,.doc,.docx,.xls,.xlsx,.zip"
+            label={t("Tech Pack Upload")}
+            optionalLabel={t("Optional")}
+            buttonLabel={t("Choose File")}
+            emptyLabel={t("No file selected")}
+            countLabel={(count) =>
+              locale === "zh" ? `已选择 ${count} 个文件` : `${count} file${count > 1 ? "s" : ""} selected`
+            }
+            onFileCountChange={(count) => updateFileCount("techPackUpload", count)}
+          />
+          <UploadField
+            name="pdfUpload"
+            accept=".pdf"
+            label={t("PDF Upload")}
+            optionalLabel={t("Optional")}
+            buttonLabel={t("Choose File")}
+            emptyLabel={t("No file selected")}
+            countLabel={(count) =>
+              locale === "zh" ? `已选择 ${count} 个文件` : `${count} file${count > 1 ? "s" : ""} selected`
+            }
+            onFileCountChange={(count) => updateFileCount("pdfUpload", count)}
+          />
         </div>
       </div>
 
