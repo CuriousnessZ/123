@@ -1591,29 +1591,6 @@ export const contactDetails = [
   { label: "Client Types", value: "Amazon sellers, Shopify brands, hotel suppliers, distributors", icon: Users2 },
 ];
 
-export const factoryScenes = [
-  {
-    title: "Workshop",
-    description: "Organized cutting and sewing zones built for consistent premium textile output.",
-    icon: Building2,
-  },
-  {
-    title: "Quality Inspection",
-    description: "Measurement, stitching, fabric, and branding checks before final packing.",
-    icon: CheckCircle2,
-  },
-  {
-    title: "Packaging Area",
-    description: "Retail-ready folding, inserts, cartons, and export labeling for global shipments.",
-    icon: ScrollText,
-  },
-  {
-    title: "Warehouse",
-    description: "Carton staging and shipment preparation aligned with buyer schedules.",
-    icon: Images,
-  },
-];
-
 export const factoryPlogMoments: FactoryPlogMoment[] = [
   {
     title: "Morning Line Check",
