@@ -34,7 +34,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-8 xl:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {headerNavItems.map((item) => (
             <Link
               key={item.href}
