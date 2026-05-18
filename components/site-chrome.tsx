@@ -9,6 +9,7 @@ import { whatsappNumber } from "@/lib/site-data";
 
 const headerNavItems = [
   { label: "Home", href: "/" },
+  { label: "Explore Our Innovation", href: "/#explore" },
   { label: "Collections", href: "/collections" },
   { label: "Journal", href: "/about-us" },
 ];
