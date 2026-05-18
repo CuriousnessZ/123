@@ -6,6 +6,7 @@ import {
   collections,
   contactDetails,
   customizationServices,
+  exploreItems,
   exportRegions,
   factoryPlogMoments,
   factoryPlogTimeline,
@@ -122,6 +123,13 @@ export function getLocalizedSiteData(locale: Locale) {
         },
       ])
     ),
+    exploreItems: exploreItems.map((item) => ({
+      ...item,
+      title: t(item.title),
+      description: t(item.description),
+      features: item.features.map((f) => t(f)),
+      ctaLabel: t(item.ctaLabel),
+    })),
     whyPartnerPoints: whyPartnerPoints.map((item) => t(item)),
     footerLinks: footerLinks.map((item) => ({
       ...item,

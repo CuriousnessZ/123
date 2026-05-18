@@ -47,6 +47,7 @@ export default async function Home() {
     collections,
     contactDetails,
     customizationServices,
+    exploreItems,
     factoryScenes,
     factoryStrengthMetrics,
     processSteps,
@@ -108,6 +109,54 @@ export default async function Home() {
               </div>
             );
           })}
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection id="explore" className="bg-white py-20 md:py-28">
+        <div className="mx-auto w-full max-w-7xl px-5 md:px-8">
+          <SectionHeading
+            align="center"
+            eyebrow={t("Explore Our Innovation")}
+            title={t("A visual directory of the technologies and standards that define our textile excellence.")}
+            description={t("Our proprietary approaches are engineered to ensure material integrity, lasting softness, and international compliance.")}
+          />
+
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {exploreItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="group flex flex-col rounded-[2rem] border border-stone-200 bg-[#fbfaf8] p-8 transition-all duration-500 hover:border-stone-300 hover:shadow-[0_22px_50px_rgba(20,16,12,0.05)]"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-stone-900 text-white transition-transform duration-500 group-hover:scale-110">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-8 text-xl font-semibold tracking-tight text-stone-950">
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-7 text-stone-600">
+                    {item.description}
+                  </p>
+                  <ul className="mt-6 flex-grow space-y-3">
+                    {item.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2 text-[13px] font-medium text-stone-500">
+                        <div className="h-1 w-1 rounded-full bg-stone-300" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={item.href}
+                    className="mt-10 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-stone-950 transition-colors hover:text-stone-600"
+                  >
+                    {t(item.ctaLabel)}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </AnimatedSection>
 

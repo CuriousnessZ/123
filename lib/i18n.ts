@@ -211,6 +211,38 @@ const zhTextMap: Record<string, string> = {
     "将面料、辅料、刺绣、印花与包装统一在一个工作流中",
   "Request Product Catalog": "获取产品目录",
   Customization: "定制服务",
+  "Explore Our Innovation": "探索我们的创新",
+  "A visual directory of the technologies and standards that define our textile excellence.":
+    "可视化展示定义我们纺织卓越品质的技术与标准。",
+  "Our proprietary approaches are engineered to ensure material integrity, lasting softness, and international compliance.":
+    "我们的工艺与方法经过系统化设计，确保材质完整性、持久柔软触感与国际合规。",
+  "Material Innovation": "材质创新",
+  "Advanced fiber engineering focused on temperature regulation, moisture wicking, and hypoallergenic properties.":
+    "先进的纤维工程，专注于温度调节、水分排干及低致敏特性。",
+  "Organic Cotton & Bamboo": "有机棉与竹纤维",
+  "GOTS Certified Fibers": "GOTS 认证纤维",
+  "Moisture-Wicking Tech": "吸湿排汗技术",
+  "Explore Materials": "探索材质",
+  "Weaving Precision": "织造精度",
+  "High-density sateen and percale constructions that balance structural integrity with a signature silky hand-feel.":
+    "高密度贡缎与 Percale 结构，在结构完整性与标志性丝滑手感之间取得平衡。",
+  "300TC - 1000TC Sateen": "300TC - 1000TC 贡缎",
+  "Crisp Percale Weaves": "清爽 Percale 织法",
+  "Jacquard Striping": "提花条纹",
+  "Explore Weaves": "探索织法",
+  "Craft Excellence": "工艺卓越",
+  "Precision-guided embroidery and tailored border finishes that define the visual identity of premium bedding capsules.":
+    "高精度刺绣与定制边缘处理，定义高端床品系列的视觉身份。",
+  "Multi-head Monogramming": "多头字母绣",
+  "Oxford Border Details": "牛津边细节",
+  "Reinforced Seams": "加固缝线",
+  "Explore Craft": "探索工艺",
+  "Sustainable Workflow": "可持续工作流",
+  "A closed-loop manufacturing approach that prioritizes ethical labor, chemical safety, and eco-friendly packaging.":
+    "闭环制造模式，优先考虑道德用工、化学安全与环保包装。",
+  "Eco-Friendly Packaging": "环保包装",
+  "Explore Sustainability": "探索可持续性",
+  "Explore Our World": "探索我们的世界",
   "End-to-End OEM & ODM Solutions for Global Brands": "面向全球品牌的一站式 OEM 与 ODM 解决方案",
   "We turn design concepts into premium textile collections with a structured workflow that ensures material integrity, brand consistency, and export readiness.":
     "我们将设计理念转化为高端家纺系列，通过结构化工作流确保材质完整性、品牌一致性与出口就绪度。",

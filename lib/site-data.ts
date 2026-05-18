@@ -137,6 +137,15 @@ export type RegionItem = {
   description: string;
 };
 
+export type ExploreItem = {
+  title: string;
+  description: string;
+  features: string[];
+  ctaLabel: string;
+  href: string;
+  icon: any;
+};
+
 export type InteriorPage = {
   title: string;
   eyebrow: string;
@@ -1454,6 +1463,45 @@ export const blogPosts: BlogPost[] = [
     category: "Hotel Sourcing",
     title: "What Hotel Suppliers Look for in Towels, Bedding, and Packaging Systems",
     excerpt: "Key specs, compliance considerations, and presentation details that influence procurement decisions.",
+  },
+];
+
+export const exploreItems: ExploreItem[] = [
+  {
+    title: "Material Innovation",
+    description:
+      "Advanced fiber engineering focused on temperature regulation, moisture wicking, and hypoallergenic properties.",
+    features: ["Organic Cotton & Bamboo", "GOTS Certified Fibers", "Moisture-Wicking Tech"],
+    ctaLabel: "Explore Materials",
+    href: "/collections",
+    icon: Sparkles,
+  },
+  {
+    title: "Weaving Precision",
+    description:
+      "High-density sateen and percale constructions that balance structural integrity with a signature silky hand-feel.",
+    features: ["300TC - 1000TC Sateen", "Crisp Percale Weaves", "Jacquard Striping"],
+    ctaLabel: "Explore Weaves",
+    href: "/collections",
+    icon: Layers3,
+  },
+  {
+    title: "Craft Excellence",
+    description:
+      "Precision-guided embroidery and tailored border finishes that define the visual identity of premium bedding capsules.",
+    features: ["Multi-head Monogramming", "Oxford Border Details", "Reinforced Seams"],
+    ctaLabel: "Explore Craft",
+    href: "/collections",
+    icon: Scissors,
+  },
+  {
+    title: "Sustainable Workflow",
+    description:
+      "A closed-loop manufacturing approach that prioritizes ethical labor, chemical safety, and eco-friendly packaging.",
+    features: ["OEKO-TEX Standard 100", "BSCI Social Audit", "Eco-Friendly Packaging"],
+    ctaLabel: "Explore Sustainability",
+    href: "/certifications",
+    icon: ShieldCheck,
   },
 ];
 
