@@ -97,31 +97,71 @@ const zhTextMap: Record<string, string> = {
   "Prepare export documents, pallet planning, carton markings, and delivery coordination.":
     "准备出口文件、托盘规划、外箱唛头与交付安排。",
   "OEM & ODM": "OEM 与 ODM",
-  "Customization and workflow reduced to the essentials.":
-    "将定制能力与合作流程精简到关键重点。",
-  "Homepage information stays focused on the capabilities buyers need first.":
-    "首页信息只保留客户最先关心的能力与流程。",
   "Fabric Customization": "面料定制",
-  "Percale, sateen, washed cotton, bamboo, microfiber, blends, and custom GSM programs.":
-    "支持 percale、贡缎、水洗棉、竹纤维、超细纤维、混纺及克重定制。",
+  "Specialized in percale, sateen, washed cotton, bamboo, microfiber, and custom GSM weight programs tailored to your market.":
+    "专业提供 percale、贡缎、水洗棉、竹纤维、超细纤维及克重定制，满足您的市场需求。",
   "Size Customization": "尺寸定制",
-  "Tailored dimensions for retail packs, hospitality projects, and regional bed standards.":
-    "可根据零售包装、酒店项目与区域床品标准定制尺寸。",
-  "Logo Embroidery": "Logo 刺绣",
-  "Premium stitched branding, woven labels, and tonal monogram execution.":
-    "支持高品质刺绣品牌、织标与同色字母绣等方案。",
-  "Pattern Printing": "图案印花",
-  "Reactive print, digital print, yarn-dye, and seasonal design development support.":
-    "支持活性印花、数码印花、色织与季节性图案开发。",
+  "Full range of international bed sizes (King, Queen, Twin, EU/UK/US standards) and custom dimensions for hospitality projects.":
+    "涵盖全系列国际床品尺寸（King、Queen、Twin、欧标/英标/美标）及酒店项目定制尺寸。",
+  "Logo & Branding": "Logo 与品牌定制",
+  "Premium embroidery, woven labels, hangtags, and tonal monogramming to establish your brand identity.":
+    "提供高品质刺绣、织标、吊牌及同色字母绣，助力建立品牌身份。",
+  "Pattern & Printing": "图案与印花",
+  "Reactive printing, digital printing, yarn-dyed jacquard, and seasonal pattern development support.":
+    "支持活性印花、数码印花、色织提花及季节性图案开发。",
   "Packaging Design": "包装设计",
-  "Gift boxes, zip bags, inserts, belly bands, and brand-ready unboxing systems.":
-    "支持礼盒、拉链袋、插卡、腰封与品牌化开箱体系设计。",
+  "Retail-ready gift boxes, PVC/fabric zip bags, belly bands, and eco-friendly packaging solutions for Amazon and Shopify brands.":
+    "提供零售级礼盒、PVC/布制拉链袋、腰封及环保包装方案，适用于 Amazon 与 Shopify 品牌。",
   "Color Matching": "颜色配比",
-  "Pantone-guided color development with buyer approval and material swatches.":
-    "依据 Pantone 进行颜色开发，并结合客户确认与色卡样布。",
-  "Private Label Manufacturing": "贴牌生产",
-  "Confidential, scalable production for Amazon, Shopify, wholesale, and hospitality buyers.":
-    "为 Amazon、Shopify、批发与酒店客户提供保密且可扩展的贴牌生产。",
+  "Strict Pantone color matching with lab-dip approval and fabric swatch confirmation before bulk production.":
+    "严格依据 Pantone 进行颜色配比，并在大货前提供小样确认与色卡样布。",
+  "Private Label": "贴牌生产",
+  "Confidential and scalable manufacturing for emerging DTC brands and established international textile distributors.":
+    "为新兴 DTC 品牌与成熟国际家纺分销商提供保密且可扩展的制造服务。",
+  "Design & Inquiry": "设计与询盘",
+  "Define product specifications, SKU mix, target pricing, and brand goals with our dedicated textile project managers.":
+    "与我们的专业家纺项目经理确认产品规格、SKU 组合、目标价格与品牌目标。",
+  "Prototyping & Sampling": "原型与打样",
+  "Fast-track sample development including material sourcing, trim matching, and construction approval samples.":
+    "快速启动样品开发，包括材料采购、辅料匹配与工艺确认样制作。",
+  "Material & Spec Approval": "材料与规格确认",
+  "Finalize fabric hand-feel, color lab-dips, packaging artwork, and technical specifications for mass production.":
+    "最终确定面料手感、颜色小样、包装设计与大货生产技术规格。",
+  "Mass Production": "批量生产",
+  "Coordinated cutting, sewing, and finishing with real-time milestone tracking and capacity management.":
+    "统筹裁剪、缝制与后整理，提供实时进度追踪与产能管理。",
+  "Strict Quality Control": "严格质量控制",
+  "Multi-stage inspection covering stitching precision, measurement accuracy, colorfastness, and final packing audits.":
+    "多阶段检验覆盖车缝精度、尺寸准确性、色牢度与最终包装审计。",
+  "Logistics & Shipping": "物流与出货",
+  "Export documentation, palletization, carton marking, and global delivery coordination for sea, air, or rail freight.":
+    "提供出口文件、托盘化处理、外箱唛头及全球海、空、铁路货运协调。",
+  "Global standard for textile safety. Our certification ensures that every thread, button, and accessory is tested for harmful substances, making it safe for sensitive skin.":
+    "全球纺织品安全标准。我们的认证确保每一根线、每一颗纽扣和辅料都经过有害物质检测，确保对敏感肌肤安全无害。",
+  "GOTS (Organic Cotton)": "GOTS (有机棉认证)",
+  "Global Organic Textile Standard. This certification verifies the organic status of textiles from harvesting of the raw materials through environmentally and socially responsible manufacturing.":
+    "全球有机纺织品标准。该认证验证了从原材料收割到环境和社会责任制造的纺织品有机状态。",
+  "International standard for Quality Management Systems. It demonstrates our commitment to consistent quality, customer satisfaction, and continuous process improvement.":
+    "国际质量管理体系标准。它体现了我们对稳定品质、客户满意度和持续流程改进的承诺。",
+  "BSCI Social Audit": "BSCI 社会责任审计",
+  "Business Social Compliance Initiative. This audit ensures ethical working conditions, fair wages, and strict adherence to labor laws within our production facility.":
+    "商业社会标准准则。该审计确保了我们生产设施内的道德工作条件、公平工资以及对劳动法的严格遵守。",
+  "Integrated Production Facility": "一体化生产基地",
+  "Monthly Production Capacity": "月生产产能",
+  "Advanced Sewing & Finishing Machinery": "先进缝制与后整理设备",
+  "Initial Quotation Response Time": "初始报价响应时间",
+  "Cutting Workshop": "裁剪车间",
+  "Equipped with automatic spreading and precision cutting systems for high-volume fabric accuracy.":
+    "配备自动铺布与精密裁剪系统，确保大批量面料处理的准确性。",
+  "Sewing Department": "缝制部门",
+  "Multi-needle quilting, specialized embroidery, and high-speed sewing lines for consistent premium finishing.":
+    "拥有多针绗缝、专业刺绣与高速缝制线，保证高端后整理的一致性。",
+  "Quality Lab": "质量实验室",
+  "On-site testing for thread tension, colorfastness, and fabric durability to meet international standards.":
+    "现场进行缝线张力、色牢度与面料耐用性测试，确保符合国际标准。",
+  "Packing & Staging": "包装与待运区",
+  "Organized retail-ready folding and export carton staging aligned with international shipping requirements.":
+    "有序的零售级折叠与出口外箱存放，符合国际运输要求。",
   Process: "流程",
   "Buyer Confidence": "客户信任",
   "Social proof and long-term cooperation reasons stay focused on buyer reassurance.":
@@ -171,28 +211,25 @@ const zhTextMap: Record<string, string> = {
     "将面料、辅料、刺绣、印花与包装统一在一个工作流中",
   "Request Product Catalog": "获取产品目录",
   Customization: "定制服务",
-  "OEM and ODM services designed to make sampling and production effortless":
-    "让打样与生产更高效顺畅的 OEM / ODM 服务",
-  "We turn design intent into premium textile collections with a workflow that feels structured, responsive, and easy for overseas sourcing teams to manage.":
-    "我们通过有结构、响应快、便于海外采购团队管理的流程，将设计意图落地成高端家纺系列。",
-  "Fabric, sizing, logo, print, color, and packaging customization":
-    "支持面料、尺寸、Logo、印花、颜色与包装定制",
-  "Fast sampling feedback cycles and organized technical communication":
-    "更快的打样反馈周期与更有条理的技术沟通",
-  "Production planning built for repeat orders and long-term brand partnerships":
-    "适用于返单与长期品牌合作的生产规划",
-  "Start OEM Project": "启动 OEM 项目",
-  Manufacturing: "制造能力",
-  "A modern textile manufacturing partner with quality-first execution":
-    "以品质优先执行为核心的现代家纺制造伙伴",
-  "Our workshop, sewing lines, inspection flow, and packaging areas are organized around reliable output, brand consistency, and export-ready communication.":
-    "我们的车间、缝制线、检验流程与包装区域围绕稳定交付、品牌一致性和出口沟通而组织。",
-  "Structured production flow from cutting and sewing to final packing":
-    "从裁剪缝制到最终包装的结构化生产流程",
-  "Inline checks for measurements, stitching, fabric quality, and branding details":
-    "对尺寸、车缝、面料质量与品牌细节进行过程检验",
-  "Support for e-commerce, wholesale, hotel, and design-studio buyers":
-    "支持电商、批发、酒店与设计工作室类客户",
+  "End-to-End OEM & ODM Solutions for Global Brands": "面向全球品牌的一站式 OEM 与 ODM 解决方案",
+  "We turn design concepts into premium textile collections with a structured workflow that ensures material integrity, brand consistency, and export readiness.":
+    "我们将设计理念转化为高端家纺系列，通过结构化工作流确保材质完整性、品牌一致性与出口就绪度。",
+  "Custom fabric development (TC, Cotton, Bamboo, Microfiber) and GSM weighting":
+    "定制面料开发（TC、纯棉、竹纤维、超细纤维）及克重定制",
+  "Comprehensive branding: Embroidery, jacquard, woven labels, and specialized packaging":
+    "全方位品牌化：刺绣、提花、织标及专业包装方案",
+  "Professional sampling workflow with fast-track prototyping for seasonal launches":
+    "专业打样流程，为季节性新品发布提供快速原型开发",
+  "Start Custom Project": "启动定制项目",
+  "Advanced Manufacturing Facility for Premium Textiles": "高端家纺先进制造基地",
+  "Our 3,000 sqm integrated facility is organized around quality-first execution, featuring modern machinery and a skilled workforce dedicated to high-standard B2B production.":
+    "我们 3,000 平方米的一体化工厂围绕“品质优先”执行，配备现代机械与技术熟练的员工，致力于高标准的 B2B 生产。",
+  "Modern sewing lines and automatic cutting systems for precision and scale":
+    "现代缝制线与自动裁剪系统，兼顾精度与规模",
+  "In-house quality lab for fabric durability, colorfastness, and safety testing":
+    "内部质量实验室，进行面料耐用性、色牢度与安全性测试",
+  "Scalable capacity supporting both low-MOQ startups and high-volume distributors":
+    "可扩展产能，同时支持低 MOQ 初创项目与大批量分销商",
   "Factory Plog": "工厂日志",
   "A more visual factory journal that lets buyers feel the daily rhythm behind production":
     "更具视觉感的工厂日志，让客户感受到生产背后的日常节奏",
@@ -261,33 +298,67 @@ const zhTextMap: Record<string, string> = {
     "以文件化流程管理支持稳定一致的品质控制。",
   "Compliance-focused manufacturing partnerships for international buyers.":
     "面向国际采购商的合规型制造合作。",
+  "300TC Organic Washed Cotton Set": "300TC 有机水洗棉套件",
+  "Relaxed luxury with a breathable matte finish": "带有透气哑光质感的松弛奢华感",
+  "A signature SKU developed for premium DTC brands, balancing a lived-in aesthetic with the structural integrity of high-density 300TC organic cotton.":
+    "为高端 DTC 品牌开发的标志性 SKU，在生活美学与高密度 300TC 有机棉的结构完整性之间取得平衡。",
+  "100% Organic Cotton, 300TC Washed Finish": "100% 有机棉，300TC 水洗工艺",
+  "200 sets per color": "每色 200 套",
+  "Pantone dyeing, custom labels, hidden button closures": "Pantone 染色、定制标签、隐藏式纽扣开合",
+  "Sustainable cotton drawstring bag with recycled insert cards": "可持续棉质抽绳袋配以再生纸插卡",
+  "7-10 days for lab-dip & sample confirmation": "7-10 天用于色样与样品确认",
+  "Premium retail, eco-conscious DTC launches, boutique hotels": "高端零售、环保型 DTC 新品、精品酒店",
+  "Proprietary washing process for a soft, matte hand-feel without pilling": "专利水洗工艺，打造柔软哑光手感且不易起球",
+  "GOTS certified organic cotton ensuring ethical sourcing and safety": "GOTS 认证有机棉，确保道德采购与安全",
+  "Reinforced double-stitched seams for durability in commercial laundry": "加强型双针车缝，确保在商用洗涤中的耐用性",
+  "400TC Hotel Sateen Stripe Set": "400TC 酒店贡缎条纹套件",
+  "Crisp architectural structure with a silky sheen": "带有丝滑光泽的清爽建筑感结构",
+  "A high-performance bedding program designed for international 5-star hospitality projects, featuring a classic 1cm or 3cm woven stripe.":
+    "专为国际五星级酒店项目设计的高性能床品方案，采用经典的 1cm 或 3cm 织造条纹。",
+  "Long-staple Cotton, 400TC Sateen Jacquard Stripe": "长绒棉，400TC 贡缎提花条纹",
+  "300 sets (Integrated size matrix supported)": "300 套（支持整合尺寸矩阵）",
+  "Embroidered property logos, specialized labels": "酒店刺绣 Logo、专业标签",
+  "Industrial-grade export bundles with protective inner lining": "工业级出口捆扎包装，配有保护内衬",
+  "10-12 days for custom property branding samples": "10-12 天用于酒店品牌定制打样",
+  "Luxury hotels, serviced apartments, institutional supply": "豪华酒店、服务式公寓、工程供应",
+  "Mercerized finish for enhanced tensile strength and lasting luster": "丝光处理增强拉伸强度与持久光泽",
+  "Optimized for high-temperature industrial washing cycles": "针对高温工业洗涤循环进行了优化",
+  "Precision-aligned jacquard stripes for a consistent bed presentation": "精确对齐的提花条纹，确保一致的床品呈现",
+  "Monogram Border Percale Set": "字母绣边 Percale 套件",
+  "Tailored precision for signature bedroom capsules": "为标志性卧室胶囊系列量身定制的精度",
+  "This set introduces refined tonal embroidery along the borders, offering a customized look for boutique brands without overwhelming the minimalist aesthetic.":
+    "该系列在边缘引入了精致的同色系刺绣，为精品品牌提供定制感，同时不破坏极简美学。",
+  "Fine-combed Cotton Percale, 200TC-400TC": "精梳棉 Percale，200TC-400TC",
+  "250 sets": "250 套",
+  "Custom border width, tonal monogram placement": "定制边宽、同色字母绣位置",
+  "Premium rigid drawer box with branded tissue wrap": "高端硬质抽屉盒配以品牌雪梨纸包装",
+  "12 days for embroidery strike-off and approval": "12 天用于刺绣打样与确认",
+  "Boutique labels, bridal registries, personalized gift programs": "精品品牌、婚礼礼赠、个性化定制项目",
+  "High-precision multi-head embroidery for consistent stitch tension": "高精度多头刺绣，确保针迹张力一致",
+  "Crisp percale weave providing a cool-to-the-touch sleep experience": "清爽的 Percale 织法，提供凉感睡眠体验",
+  "Tailored oxford borders with mitered corners for a sharp finish": "定制牛津边与 45 度拼角处理，确保干练外观",
+  "Linen-Cotton Blend Layered Collection": "亚麻棉混纺层次系列",
+  "The natural drape of linen with the softness of cotton": "亚麻的自然垂感与棉的柔软结合",
+  "Developed for Scandinavian-inspired interior brands, this blend provides the irregular texture of linen while maintaining the ease of care associated with cotton.":
+    "为北欧风格室内品牌开发，这种混纺提供了亚麻的自然纹理，同时保持了棉的易打理特性。",
+  "55% Linen, 45% Cotton Yarn-dyed Blend": "55% 亚麻，45% 棉色织混纺",
+  "400 sets": "400 套",
+  "Specialized garment washing, customized fringe/edge details": "专业成衣水洗、定制流苏/边缘细节",
+  "Eco-friendly belly bands with biodegradable poly-bags": "环保腰封配以可降解包装袋",
+  "8-10 days for wash shade and hand-feel approval": "8-10 天用于洗水色相与手感确认",
+  "Natural home concepts, interior design studios, lifestyle retail": "自然家居理念、室内设计工作室、生活方式零售",
+  "Yarn-dyed process for deep, multi-tonal color depth and wash fastness": "色织工艺带来深邃的多色调深度与洗涤牢度",
+  "Breathable moisture-wicking properties ideal for all-season layering": "透气吸湿特性，是四季叠搭的理想选择",
+  "Pre-shrunk finish to ensure dimensional stability after retail purchase": "预缩水处理，确保零售购买后的尺寸稳定性",
   "Bedding Sets": "床品套件",
-  "Editorial bedding collections designed for modern retail and hospitality programs.":
-    "为现代零售与酒店项目打造的编辑感床品系列。",
   "Duvet Covers": "被套",
-  "Soft-touch duvet programs with premium finishes, trims, and packaging options.":
-    "具备高级后整理、辅料与包装方案的柔软被套系列。",
   Pillowcases: "枕套",
-  "Luxury pillowcase capsules with logo embroidery, piping, and gift-ready sets.":
-    "支持 Logo 刺绣、滚边与礼盒组合的高端枕套系列。",
   Blankets: "毛毯",
-  "Layered comfort pieces for e-commerce bundles, seasonal launches, and hotel suites.":
-    "适用于电商组合、季节上新与酒店套房的舒适毛毯产品。",
   Towels: "毛巾",
-  "Absorbent towel collections tailored for resorts, spas, and premium home brands.":
-    "为度假酒店、水疗与高端家居品牌定制的吸水毛巾系列。",
   Curtains: "窗帘",
-  "Textured drapery systems with blackout, linen-look, and embroidered solutions.":
-    "支持遮光、亚麻感与刺绣方案的层次化窗帘系统。",
   "Hotel Collection": "酒店系列",
-  "Coordinated institutional textile programs built around durability and elegance.":
-    "兼顾耐用性与质感的酒店项目配套家纺方案。",
   "Kids Collection": "儿童系列",
-  "Private-label textile sets with playful prints, safe materials, and gift packaging.":
-    "支持趣味印花、安全材料与礼盒包装的贴牌儿童家纺套装。",
   "Embroidery Collection": "刺绣系列",
-  "Signature stitched details and premium ornamentation for differentiated brand stories.":
-    "以代表性刺绣细节与高级装饰打造差异化品牌故事。",
   "Quiet Layering": "静奢层次",
   "A composed bedding story built around layered neutrals, soft construction, and retail-ready presentation for modern interior brands.":
     "以层次化中性色、柔和结构与零售呈现为核心，为现代家居品牌打造一套完整床品叙事。",
@@ -436,15 +507,15 @@ const zhTextMap: Record<string, string> = {
   Page: "页码",
   "Instead of overwhelming buyers with a crowded catalog, this page frames each category like an interior brand presentation: fewer stories, better composition, and stronger material cues.":
     "这页不再用拥挤目录压向客户，而是像高端室内品牌提案那样展示每个品类：内容更少，构图更好，材料提示更明确。",
-  "Wide Editorial View": "大图场景",
-  "A wider image that establishes scale, atmosphere, and the premium tone of the collection.":
-    "用更完整的画面先建立系列的尺度、氛围与高级气质。",
-  "Material Close-Up": "材质近景",
-  "A tighter crop used to suggest texture, fabric movement, and surface refinement.":
-    "通过更近的裁切去强调纹理、材质流动感与表面精致度。",
-  "Craft & Finish Detail": "工艺细节",
-  "A more technical framing that supports discussions around finishing, precision, and product execution.":
-    "用更技术性的视角去支撑后整理、精度与落地执行层面的沟通。",
+  "Atmospheric Scene": "场景氛围图",
+  "A wide editorial framing that captures the product in a styled interior environment, establishing the overall brand mood and scale.":
+    "大图场景构图，捕捉产品在精心设计的室内环境中的状态，建立整体品牌调性与尺度感。",
+  "Textural Detail": "材质纹理图",
+  "A close-up view focusing on the fabric weave, tactile surface quality, and natural drape under soft studio lighting.":
+    "特写镜头，专注于柔和灯光下的面料织理、触感质量与自然垂感。",
+  "Technical Execution": "技术工艺图",
+  "A detailed macro shot highlighting the precision of stitching, border finishing, and specialized hardware or closure details.":
+    "宏观细节拍摄，突出车缝精度、边缘处理以及特定的辅料或开合细节。",
   MOQ: "起订量",
   "Material Direction": "材料方向",
   "Natural fibres, soft tactility, and composed finishes stay at the center of the assortment.":
@@ -568,11 +639,6 @@ const zhTextMap: Record<string, string> = {
   "About Us | Premium Home Textiles": "关于我们 | Premium Home Textiles",
   About: "关于",
   Pinned: "置顶",
-  "Featured project at the top of the feed": "顶部展示重点项目",
-  "Dark / White": "深色 / 浅色",
-  "Consistent editorial theme with cinematic contrast": "具有电影感对比的统一编辑风格",
-  Infinite: "无限滚动",
-  "Scrollable story feed with tag filtering": "支持标签筛选的纵向故事流",
   "A modern manufacturing journal for a premium home textile factory.":
     "一个面向高端家纺工厂的现代制造日志页面。",
   "Built with an industrial documentary aesthetic, this page turns the factory into an editorial story: real projects, process moments, quality checkpoints, shipment logic, and the rhythm of production itself.":
@@ -587,9 +653,6 @@ const zhTextMap: Record<string, string> = {
     "以更具电影感与编辑感的节奏浏览工厂故事。",
   "Inspired by Medium, LinkedIn, and Apple-style manufacturing storytelling, the feed emphasizes process clarity, material quality, and shipment realism while keeping the premium site language intact.":
     "灵感来自 Medium、LinkedIn 以及 Apple 风格的制造叙事，强调流程清晰、材料质感与出货真实感，同时保持网站的高端语言。",
-  "Journal system scaffold": "日志系统脚手架",
-  "Public reading experience is ready now. Admin-only posting, image uploads, video embedding, drafts, pinned stories, and Supabase-based publishing are scaffolded in the admin route.":
-    "当前公开阅读体验已就绪。仅管理员发布、图片上传、视频嵌入、草稿、置顶文章与基于 Supabase 的发布能力，已在后台路由中完成脚手架。",
   All: "全部",
   "No stories match this tag yet.": "当前还没有符合该标签的内容。",
   "Load More Stories": "加载更多故事",

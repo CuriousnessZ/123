@@ -185,27 +185,27 @@ function buildCollectionGallery(
 ): CollectionGalleryItem[] {
   return [
     {
-      title: "Wide Editorial View",
+      title: "Atmospheric Scene",
       description:
-        "A wider image that establishes scale, atmosphere, and the premium tone of the collection.",
+        "A wide editorial framing that captures the product in a styled interior environment, establishing the overall brand mood and scale.",
       imageUrl: "/cover.png",
-      imageAlt: `${baseTitle} wide editorial view`,
+      imageAlt: `${baseTitle} atmospheric scene`,
       imagePosition: positions[0],
     },
     {
-      title: "Material Close-Up",
+      title: "Textural Detail",
       description:
-        "A tighter crop used to suggest texture, fabric movement, and surface refinement.",
+        "A close-up view focusing on the fabric weave, tactile surface quality, and natural drape under soft studio lighting.",
       imageUrl: "/cover.png",
-      imageAlt: `${baseTitle} material close-up`,
+      imageAlt: `${baseTitle} textural detail`,
       imagePosition: positions[1],
     },
     {
-      title: "Craft & Finish Detail",
+      title: "Technical Execution",
       description:
-        "A more technical framing that supports discussions around finishing, precision, and product execution.",
+        "A detailed macro shot highlighting the precision of stitching, border finishing, and specialized hardware or closure details.",
       imageUrl: "/cover.png",
-      imageAlt: `${baseTitle} craft and finish detail`,
+      imageAlt: `${baseTitle} technical execution`,
       imagePosition: positions[2],
     },
   ];
@@ -469,124 +469,232 @@ export const collections: CollectionItem[] = [
 ];
 
 export const customizationServices: ServiceItem[] = [
-  { title: "Fabric Customization", description: "Percale, sateen, washed cotton, bamboo, microfiber, blends, and custom GSM programs.", icon: Shirt },
-  { title: "Size Customization", description: "Tailored dimensions for retail packs, hospitality projects, and regional bed standards.", icon: Ruler },
-  { title: "Logo Embroidery", description: "Premium stitched branding, woven labels, and tonal monogram execution.", icon: PenTool },
-  { title: "Pattern Printing", description: "Reactive print, digital print, yarn-dye, and seasonal design development support.", icon: Paintbrush },
-  { title: "Packaging Design", description: "Gift boxes, zip bags, inserts, belly bands, and brand-ready unboxing systems.", icon: Package2 },
-  { title: "Color Matching", description: "Pantone-guided color development with buyer approval and material swatches.", icon: Palette },
-  { title: "Private Label Manufacturing", description: "Confidential, scalable production for Amazon, Shopify, wholesale, and hospitality buyers.", icon: BadgeCheck },
+  {
+    title: "Fabric Customization",
+    description:
+      "Specialized in percale, sateen, washed cotton, bamboo, microfiber, and custom GSM weight programs tailored to your market.",
+    icon: Shirt,
+  },
+  {
+    title: "Size Customization",
+    description:
+      "Full range of international bed sizes (King, Queen, Twin, EU/UK/US standards) and custom dimensions for hospitality projects.",
+    icon: Ruler,
+  },
+  {
+    title: "Logo & Branding",
+    description:
+      "Premium embroidery, woven labels, hangtags, and tonal monogramming to establish your brand identity.",
+    icon: PenTool,
+  },
+  {
+    title: "Pattern & Printing",
+    description:
+      "Reactive printing, digital printing, yarn-dyed jacquard, and seasonal pattern development support.",
+    icon: Paintbrush,
+  },
+  {
+    title: "Packaging Design",
+    description:
+      "Retail-ready gift boxes, PVC/fabric zip bags, belly bands, and eco-friendly packaging solutions for Amazon and Shopify brands.",
+    icon: Package2,
+  },
+  {
+    title: "Color Matching",
+    description:
+      "Strict Pantone color matching with lab-dip approval and fabric swatch confirmation before bulk production.",
+    icon: Palette,
+  },
+  {
+    title: "Private Label",
+    description:
+      "Confidential and scalable manufacturing for emerging DTC brands and established international textile distributors.",
+    icon: BadgeCheck,
+  },
 ];
 
 export const processSteps: ProcessStep[] = [
-  { title: "Inquiry", description: "Align target market, SKU mix, quantities, and product goals with our textile specialist.", icon: MessageCircleMore },
-  { title: "Sampling", description: "Develop counter samples, trims, branding, and construction details for approval.", icon: Scissors },
-  { title: "Material Confirmation", description: "Lock fabric hand feel, finishes, packaging structure, and quality benchmarks.", icon: SwatchBook },
-  { title: "Production", description: "Coordinate cutting, sewing, embroidery, printing, and in-line milestone control.", icon: Layers3 },
-  { title: "QC", description: "Inspect stitching, measurements, colorfastness, labeling, and final packing accuracy.", icon: ShieldCheck },
-  { title: "Shipping", description: "Prepare export documents, pallet planning, carton markings, and delivery coordination.", icon: Truck },
+  {
+    title: "Design & Inquiry",
+    description:
+      "Define product specifications, SKU mix, target pricing, and brand goals with our dedicated textile project managers.",
+    icon: MessageCircleMore,
+  },
+  {
+    title: "Prototyping & Sampling",
+    description:
+      "Fast-track sample development including material sourcing, trim matching, and construction approval samples.",
+    icon: Scissors,
+  },
+  {
+    title: "Material & Spec Approval",
+    description:
+      "Finalize fabric hand-feel, color lab-dips, packaging artwork, and technical specifications for mass production.",
+    icon: SwatchBook,
+  },
+  {
+    title: "Mass Production",
+    description:
+      "Coordinated cutting, sewing, and finishing with real-time milestone tracking and capacity management.",
+    icon: Layers3,
+  },
+  {
+    title: "Strict Quality Control",
+    description:
+      "Multi-stage inspection covering stitching precision, measurement accuracy, colorfastness, and final packing audits.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Logistics & Shipping",
+    description:
+      "Export documentation, palletization, carton marking, and global delivery coordination for sea, air, or rail freight.",
+    icon: Truck,
+  },
 ];
 
 export const certifications: CertificationItem[] = [
-  { name: "OEKO-TEX", description: "Safer materials and finished textiles for premium home categories." },
-  { name: "GOTS", description: "Responsible textile sourcing programs for organic-focused collections." },
-  { name: "ISO9001", description: "Documented process controls that support reliable quality consistency." },
-  { name: "BSCI", description: "Compliance-focused manufacturing partnerships for international buyers." },
+  {
+    name: "OEKO-TEX Standard 100",
+    description:
+      "Global standard for textile safety. Our certification ensures that every thread, button, and accessory is tested for harmful substances, making it safe for sensitive skin.",
+  },
+  {
+    name: "GOTS (Organic Cotton)",
+    description:
+      "Global Organic Textile Standard. This certification verifies the organic status of textiles from harvesting of the raw materials through environmentally and socially responsible manufacturing.",
+  },
+  {
+    name: "ISO 9001:2015",
+    description:
+      "International standard for Quality Management Systems. It demonstrates our commitment to consistent quality, customer satisfaction, and continuous process improvement.",
+  },
+  {
+    name: "BSCI Social Audit",
+    description:
+      "Business Social Compliance Initiative. This audit ensures ethical working conditions, fair wages, and strict adherence to labor laws within our production facility.",
+  },
 ];
 
 export const factoryStrengthMetrics: FactoryStrengthMetric[] = [
-  { value: "3000sqm", label: "Production and finishing facility" },
-  { value: "10+ Years", label: "Home textile manufacturing experience" },
-  { value: "50+ Countries", label: "Export markets served" },
-  { value: "7 Days", label: "Sampling response for active projects" },
+  { value: "3,000 sqm", label: "Integrated Production Facility" },
+  { value: "50,000+ pcs", label: "Monthly Production Capacity" },
+  { value: "100+ Units", label: "Advanced Sewing & Finishing Machinery" },
+  { value: "24-48 Hours", label: "Initial Quotation Response Time" },
+];
+
+export const factoryScenes: ServiceItem[] = [
+  {
+    title: "Cutting Workshop",
+    description:
+      "Equipped with automatic spreading and precision cutting systems for high-volume fabric accuracy.",
+    icon: Scissors,
+  },
+  {
+    title: "Sewing Department",
+    description:
+      "Multi-needle quilting, specialized embroidery, and high-speed sewing lines for consistent premium finishing.",
+    icon: Shirt,
+  },
+  {
+    title: "Quality Lab",
+    description:
+      "On-site testing for thread tension, colorfastness, and fabric durability to meet international standards.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Packing & Staging",
+    description:
+      "Organized retail-ready folding and export carton staging aligned with international shipping requirements.",
+    icon: Warehouse,
+  },
 ];
 
 export const products: ProductItem[] = [
   createProduct({
-    slug: "washed-cotton-core-bedding-set",
-    name: "Washed Cotton Core Bedding Set",
-    tagline: "Relaxed retail bedding with a soft matte finish",
+    slug: "300tc-organic-washed-cotton-set",
+    name: "300TC Organic Washed Cotton Set",
+    tagline: "Relaxed luxury with a breathable matte finish",
     summary:
-      "A foundational bedding SKU for premium home launches that need soft hand feel, simple styling, and dependable repeat production.",
-    fabric: "100% washed cotton, 200-300TC",
-    moq: "300 sets",
-    customization: "Embroidery, labels, Pantone trims",
-    packaging: "Gift box, insert card, zip bag",
+      "A signature SKU developed for premium DTC brands, balancing a lived-in aesthetic with the structural integrity of high-density 300TC organic cotton.",
+    fabric: "100% Organic Cotton, 300TC Washed Finish",
+    moq: "200 sets per color",
+    customization: "Pantone dyeing, custom labels, hidden button closures",
+    packaging: "Sustainable cotton drawstring bag with recycled insert cards",
     accent: "from-[#312c29] via-[#72675d] to-[#d1c5b8]",
     collectionSlug: "bedding-sets",
     imagePosition: "76% center",
-    leadTime: "7-10 days for sampling",
-    useCase: "Boutique retail, calm neutral assortment, DTC bedding launch",
+    leadTime: "7-10 days for lab-dip & sample confirmation",
+    useCase: "Premium retail, eco-conscious DTC launches, boutique hotels",
     detailBullets: [
-      "Soft matte wash effect built for elevated everyday bedding",
-      "Balanced color palette for coordinated bedroom programs",
-      "Retail folding options for premium shelf presentation",
+      "Proprietary washing process for a soft, matte hand-feel without pilling",
+      "GOTS certified organic cotton ensuring ethical sourcing and safety",
+      "Reinforced double-stitched seams for durability in commercial laundry",
     ],
     galleryPositions: ["76% center", "86% 44%", "56% 18%"],
   }),
   createProduct({
-    slug: "hotel-stripe-sateen-bedding-set",
-    name: "Hotel Stripe Sateen Bedding Set",
-    tagline: "Hospitality-inspired sateen bedding with crisp structure",
+    slug: "400tc-hotel-sateen-stripe-set",
+    name: "400TC Hotel Sateen Stripe Set",
+    tagline: "Crisp architectural structure with a silky sheen",
     summary:
-      "A cleaner, more polished bedding option for buyers who want a hotel-grade look translated into private-label retail or hospitality supply.",
-    fabric: "Stripe sateen, high-density weave",
-    moq: "200 sets",
-    customization: "Size matrix, woven labels, tonal embroidery",
-    packaging: "Hospitality fold set, export carton",
+      "A high-performance bedding program designed for international 5-star hospitality projects, featuring a classic 1cm or 3cm woven stripe.",
+    fabric: "Long-staple Cotton, 400TC Sateen Jacquard Stripe",
+    moq: "300 sets (Integrated size matrix supported)",
+    customization: "Embroidered property logos, specialized labels",
+    packaging: "Industrial-grade export bundles with protective inner lining",
     accent: "from-[#202325] via-[#656f76] to-[#d7dde2]",
     collectionSlug: "bedding-sets",
     imagePosition: "82% center",
-    leadTime: "10-12 days for custom sample confirmation",
-    useCase: "Hotels, serviced apartments, premium bedroom capsule",
+    leadTime: "10-12 days for custom property branding samples",
+    useCase: "Luxury hotels, serviced apartments, institutional supply",
     detailBullets: [
-      "Structured hotel stripe finish for a refined top-of-bed look",
-      "Works across hospitality and premium home channels",
-      "Suitable for coordinated duvet and sheet programs",
+      "Mercerized finish for enhanced tensile strength and lasting luster",
+      "Optimized for high-temperature industrial washing cycles",
+      "Precision-aligned jacquard stripes for a consistent bed presentation",
     ],
     galleryPositions: ["82% center", "90% 48%", "62% 20%"],
   }),
   createProduct({
-    slug: "embroidered-border-bedding-set",
-    name: "Embroidered Border Bedding Set",
-    tagline: "Decorative embroidery brought into a quieter luxury format",
+    slug: "monogram-border-percale-set",
+    name: "Monogram Border Percale Set",
+    tagline: "Tailored precision for signature bedroom capsules",
     summary:
-      "This set introduces refined stitched detailing without making the assortment feel ornate, keeping the look modern and commercially flexible.",
-    fabric: "Washed cotton blend with embroidery border",
+      "This set introduces refined tonal embroidery along the borders, offering a customized look for boutique brands without overwhelming the minimalist aesthetic.",
+    fabric: "Fine-combed Cotton Percale, 200TC-400TC",
     moq: "250 sets",
-    customization: "Monogram placement, border color, brand labels",
-    packaging: "Drawer box, belly band, fold insert",
+    customization: "Custom border width, tonal monogram placement",
+    packaging: "Premium rigid drawer box with branded tissue wrap",
     accent: "from-[#413934] via-[#84776c] to-[#ddd3c7]",
     collectionSlug: "bedding-sets",
     imagePosition: "70% center",
-    leadTime: "12 days for embroidery approval sample",
-    useCase: "Boutique labels, bridal-inspired launches, gifting edit",
+    leadTime: "12 days for embroidery strike-off and approval",
+    useCase: "Boutique labels, bridal registries, personalized gift programs",
     detailBullets: [
-      "Embroidery positioned as a premium trim rather than heavy ornament",
-      "Ideal for signature sets inside a larger bedroom story",
-      "Works with tonal labeling and boxed gift presentation",
+      "High-precision multi-head embroidery for consistent stitch tension",
+      "Crisp percale weave providing a cool-to-the-touch sleep experience",
+      "Tailored oxford borders with mitered corners for a sharp finish",
     ],
     galleryPositions: ["70% center", "80% 36%", "54% 16%"],
   }),
   createProduct({
-    slug: "linen-touch-layered-bedding-set",
-    name: "Linen-Touch Layered Bedding Set",
-    tagline: "Airy texture with an editorial drape",
+    slug: "linen-blend-layered-collection",
+    name: "Linen-Cotton Blend Layered Collection",
+    tagline: "The natural drape of linen with the softness of cotton",
     summary:
-      "A linen-inspired bedding set developed for brands that want texture, softness, and an understated natural mood without a fully rustic feel.",
-    fabric: "Linen-touch cotton blend",
-    moq: "300 sets",
-    customization: "Label development, edge detail, size adjustment",
-    packaging: "Folded retail stack, soft zip bag",
+      "Developed for Scandinavian-inspired interior brands, this blend provides the irregular texture of linen while maintaining the ease of care associated with cotton.",
+    fabric: "55% Linen, 45% Cotton Yarn-dyed Blend",
+    moq: "400 sets",
+    customization: "Specialized garment washing, customized fringe/edge details",
+    packaging: "Eco-friendly belly bands with biodegradable poly-bags",
     accent: "from-[#544a42] via-[#9b8e81] to-[#e7ddd3]",
     collectionSlug: "bedding-sets",
     imagePosition: "74% center",
-    leadTime: "8-10 days for wash and shade confirmation",
-    useCase: "Natural home collections, studio brands, Scandinavian assortment",
+    leadTime: "8-10 days for wash shade and hand-feel approval",
+    useCase: "Natural home concepts, interior design studios, lifestyle retail",
     detailBullets: [
-      "Texture-driven bedding story with soft visual movement",
-      "Appropriate for neutral palettes and layered merchandising",
-      "Easy to pair with pillowcases and blanket upsell items",
+      "Yarn-dyed process for deep, multi-tonal color depth and wash fastness",
+      "Breathable moisture-wicking properties ideal for all-season layering",
+      "Pre-shrunk finish to ensure dimensional stability after retail purchase",
     ],
     galleryPositions: ["74% center", "88% 52%", "58% 22%"],
   }),
@@ -1364,24 +1472,26 @@ export const interiorPages: Record<string, InteriorPage> = {
   },
   "oem-odm": {
     eyebrow: "Customization",
-    title: "OEM and ODM services designed to make sampling and production effortless",
-    description: "We turn design intent into premium textile collections with a workflow that feels structured, responsive, and easy for overseas sourcing teams to manage.",
+    title: "End-to-End OEM & ODM Solutions for Global Brands",
+    description:
+      "We turn design concepts into premium textile collections with a structured workflow that ensures material integrity, brand consistency, and export readiness.",
     highlights: [
-      "Fabric, sizing, logo, print, color, and packaging customization",
-      "Fast sampling feedback cycles and organized technical communication",
-      "Production planning built for repeat orders and long-term brand partnerships",
+      "Custom fabric development (TC, Cotton, Bamboo, Microfiber) and GSM weighting",
+      "Comprehensive branding: Embroidery, jacquard, woven labels, and specialized packaging",
+      "Professional sampling workflow with fast-track prototyping for seasonal launches",
     ],
-    ctaLabel: "Start OEM Project",
+    ctaLabel: "Start Custom Project",
     heroAccent: "from-[#27211c] via-[#8f7865] to-[#eee3d7]",
   },
   factory: {
     eyebrow: "Manufacturing",
-    title: "A modern textile manufacturing partner with quality-first execution",
-    description: "Our workshop, sewing lines, inspection flow, and packaging areas are organized around reliable output, brand consistency, and export-ready communication.",
+    title: "Advanced Manufacturing Facility for Premium Textiles",
+    description:
+      "Our 3,000 sqm integrated facility is organized around quality-first execution, featuring modern machinery and a skilled workforce dedicated to high-standard B2B production.",
     highlights: [
-      "Structured production flow from cutting and sewing to final packing",
-      "Inline checks for measurements, stitching, fabric quality, and branding details",
-      "Support for e-commerce, wholesale, hotel, and design-studio buyers",
+      "Modern sewing lines and automatic cutting systems for precision and scale",
+      "In-house quality lab for fabric durability, colorfastness, and safety testing",
+      "Scalable capacity supporting both low-MOQ startups and high-volume distributors",
     ],
     ctaLabel: "Talk to Our Factory Team",
     heroAccent: "from-[#202020] via-[#59514c] to-[#d8cbc0]",
